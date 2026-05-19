@@ -4,11 +4,173 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Misha & Nastya · Big Day & Beyond</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #faf8f5;
+    --card: #ffffff;
+    --primary: #f4a895;
+    --accent: #ffa07a;
+    --text: #3d2f2b;
+    --text-light: #6b5a52;
+    --border: #e8dfd8;
+    --shadow: 0 8px 24px rgba(244, 168, 149, 0.12);
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body { 
+    background: var(--bg); 
+    color: var(--text); 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  
+  /* PASSWORD SCREEN */
+  .password-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .password-screen.hidden {
+    display: none;
+  }
+  
+  .password-container {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 60px 40px;
+    box-shadow: var(--shadow);
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .password-header {
+    margin-bottom: 30px;
+  }
+  
+  .heart {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: block;
+  }
+  
+  h1 {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--primary);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 30px;
+  }
+  
+  .password-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  input[type="password"] {
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: all 0.3s;
+  }
+  
+  input[type="password"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(244, 168, 149, 0.1);
+  }
+  
+  button {
+    padding: 14px 24px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  button:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+  
+  .error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 10px;
+    display: none;
+  }
+  
+  .error.show {
+    display: block;
+  }
+  
+  .info {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .loading {
+    display: none;
+    text-align: center;
+  }
+
+  .spinner {
+    border: 3px solid var(--border);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 10px;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .form-content {
+    display: block;
+  }
+
+  .form-content.hidden {
+    display: none;
+  }
+
+  /* MAIN CONTENT */
+  #main-content {
+    display: none;
+  }
+
+  #main-content.visible {
+    display: block;
+  }
+
   :root {
     --bg: #faf8f5;
     --card: #ffffff;
@@ -905,9 +1067,46 @@
   .cat-row .badge.custom { background: #fce4f0; color: var(--primary); }
   .btn-icon.edit:hover { color: var(--primary); border-color: var(--primary); }
   .cat-usage { font-size: 11px; color: var(--text-light); }
+
 </style>
 </head>
 <body>
+
+<!-- PASSWORD SCREEN -->
+<div class="password-screen" id="password-screen">
+  <div class="password-container">
+    <div class="password-header">
+      <span class="heart">💕</span>
+      <h1>Misha & Nastya</h1>
+      <p class="subtitle">Big Day & Beyond</p>
+    </div>
+    
+    <div class="form-content">
+      <form class="password-form" id="password-form">
+        <input 
+          type="password" 
+          id="password-input" 
+          placeholder="Введи пароль..." 
+          autocomplete="off"
+          required
+        >
+        <button type="submit">🔓 Открыть планер</button>
+        <div class="error" id="error-msg">❌ Неправильный пароль</div>
+      </form>
+    </div>
+    
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>Загружаю...</p>
+    </div>
+    
+    <div class="info">
+      💡 Защита паролем включена
+    </div>
+  </div>
+</div>
+
+<div id="main-content" style="display: none;"><body>
 
 <header>
   <div class="header-deco">
@@ -3843,6 +4042,49 @@ function renderCars() {
 document.addEventListener("DOMContentLoaded", init);
 document.addEventListener("DOMContentLoaded", initGuests);
 document.addEventListener("DOMContentLoaded", initCarpooling);
+</script>
+
+</body></div>
+
+<script>
+  const PASSWORD = "awx2kdh8QWD6rjk!whg";
+  
+  function checkPassword() {
+    const savedPassword = localStorage.getItem('wedding_auth');
+    if (savedPassword === PASSWORD) {
+      unlockContent();
+    }
+  }
+  
+  function unlockContent() {
+    document.getElementById('password-screen').classList.add('hidden');
+    document.getElementById('main-content').classList.add('visible');
+  }
+  
+  document.getElementById('password-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('password-input');
+    const password = input.value;
+    
+    if (password === PASSWORD) {
+      localStorage.setItem('wedding_auth', PASSWORD);
+      document.querySelector('.form-content').classList.add('hidden');
+      document.getElementById('loading').style.display = 'block';
+      
+      setTimeout(() => {
+        unlockContent();
+      }, 500);
+    } else {
+      document.getElementById('error-msg').classList.add('show');
+      input.value = '';
+      input.focus();
+    }
+  });
+  
+  document.getElementById('password-input').focus();
+  
+  // Check if already authenticated
+  checkPassword();
 </script>
 
 </body>
