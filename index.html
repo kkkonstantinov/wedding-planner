@@ -4,145 +4,3905 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Misha & Nastya · Big Day & Beyond</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { 
-    background: #faf8f5; 
-    color: #3d2f2b; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    min-height: 100vh;
+  :root {
+    --bg: #faf8f5;
+    --card: #ffffff;
+    --primary: #f4a895;
+    --primary-light: #f9d1c5;
+    --accent: #ffa07a;
+    --accent-light: #ffe8d1;
+    --sage: #a8d4b8;
+    --sage-light: #d0e8db;
+    --blush: #ffd4b3;
+    --blush-light: #ffe8d1;
+    --warm: #ffc2a5;
+    --neutral: #f5f3f0;
+    --text: #3d2f2b;
+    --text-light: #6b5a52;
+    --border: #e8dfd8;
+    --shadow-sm: 0 2px 8px rgba(244, 168, 149, 0.08);
+    --shadow: 0 8px 24px rgba(244, 168, 149, 0.12);
+    --shadow-lg: 0 20px 48px rgba(244, 168, 149, 0.15);
   }
-  
-  .password-screen {
-    position: fixed;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif; line-height: 1.5; overflow-x: hidden; min-height: 100vh; }
+  body { padding-bottom: 300px; max-width: 100vw; }
+  a { color: var(--primary); }
+  button { font-family: inherit; cursor: pointer; }
+  input, select, textarea { font-family: inherit; font-size: 14px; }
+
+  /* HEADER */
+
+  /* HEADER */
+  header { 
+    position: relative;
+    padding: 0;
+    text-align: center;
+  }
+  header::before {
+    content: "";
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: #faf8f5;
+    background: linear-gradient(135deg, #f4a895 0%, #ffc2a5 100%);
+    z-index: -2;
+  }
+  header::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255,255,255,0.12) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(255,255,255,0.08) 0%, transparent 40%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .header-deco {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .header-deco svg { position: absolute; opacity: 0.18; }
+  .header-deco .d1  { top: 14px;  left: 28px;    width: 80px; }
+  .header-deco .d2  { top: 14px;  right: 32px;   width: 65px; }
+  .header-deco .d3  { top: 14px;  left: 18%;     width: 32px; opacity: 0.16; }
+  .header-deco .d4  { top: 14px;  right: 18%;    width: 32px; opacity: 0.16; }
+  .header-deco .d5  { top: 16px;  left: 35%;     width: 22px; opacity: 0.14; }
+  .header-deco .d6  { top: 16px;  right: 35%;    width: 22px; opacity: 0.14; }
+  .header-deco .d7  { top: 38%;   left: 4%;      width: 44px; opacity: 0.16; }
+  .header-deco .d8  { top: 32%;   right: 4%;     width: 44px; opacity: 0.16; }
+  .header-deco .d9  { top: 28%;   left: 14%;     width: 28px; opacity: 0.14; }
+  .header-deco .d10 { top: 42%;   right: 14%;    width: 28px; opacity: 0.14; }
+  .header-deco .d11 { top: 22%;   left: 26%;     width: 22px; opacity: 0.13; }
+  .header-deco .d12 { top: 18%;   right: 26%;    width: 22px; opacity: 0.13; }
+  .header-deco .d13 { bottom: -6px; left: -6px;  width: 145px; opacity: 0.22; }
+  .header-deco .d14 { bottom: -6px; right: -6px; width: 145px; opacity: 0.22; transform: scaleX(-1); }
+  .header-deco .d15 { bottom: -6px; left: 24%;   width: 115px; opacity: 0.15; }
+  .header-deco .d16 { bottom: -6px; right: 24%;  width: 105px; opacity: 0.14; transform: scaleX(-1); }
+  .header-deco .d17 { bottom: 22px; left: 44%;   width: 30px;  opacity: 0.15; }
+  .header-deco .d18 { top: 52%;   left: 20%;     width: 20px; opacity: 0.13; }
+  .header-deco .d19 { top: 58%;   right: 22%;    width: 20px; opacity: 0.13; }
+  .header-deco .d20 { top: 35%;   left: 42%;     width: 18px; opacity: 0.10; }
+  .header-deco .d21 { top: 20%;   left: 48%;     width: 16px; opacity: 0.10; }
+  .header-deco .d22 { top: 50%;   left: 32%;     width: 24px; opacity: 0.12; }
+  .header-deco .d23 { top: 45%;   right: 30%;    width: 24px; opacity: 0.12; }
+  
+
+  
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+    padding: 16px 20px;
+  }
+  
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .heart-accent {
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1;
+  }
+  
+  .couple-names {
+    font-size: 42px;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+  
+  .tagline {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .lang-switch { 
+    display: flex; 
+    gap: 8px; 
+    background: rgba(255, 255, 255, 0.12); 
+    border-radius: 50px; 
+    padding: 8px 12px; 
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .lang-switch button { 
+    border: none; 
+    background: transparent; 
+    padding: 8px 16px; 
+    border-radius: 40px; 
+    font-size: 12px; 
+    font-weight: 500; 
+    color: rgba(255, 255, 255, 0.75); 
+    transition: all 0.25s ease; 
+    cursor: pointer;
+  }
+  .lang-switch button.active { 
+    background: rgba(255, 255, 255, 0.25); 
+    color: #fff; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .countdown-main {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    margin: 16px 0;
+  }
+  .countdown-main .big {
+    font-size: 64px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .header-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+  }
+  
+  .countdown-date {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: left;
+  }
+  .countdown-date div:last-child {
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 6px;
+  }
+
+  .color-switch {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .save-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    min-height: 24px;
+  }
+  
+  .save-indicator.saving {
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(168, 212, 184, 0.2);
+    border-color: rgba(168, 212, 184, 0.4);
+  }
+  
+  .save-indicator svg {
+    width: 12px;
+    height: 12px;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+  
+  .save-indicator.saving svg {
+    opacity: 1;
+    animation: spin 0.8s linear;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .color-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .color-btn[data-color="peach"] {
+    background: #ffc2a5;
+  }
+  .color-btn[data-color="mint"] {
+    background: #a8d4b8;
+  }
+  .color-btn[data-color="coral"] {
+    background: #f4a895;
+  }
+  .color-btn:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+  }
+  .color-btn.active {
+    border-color: #fff;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 32px 20px; }
+    .header-content { gap: 20px; }
+    .heart-accent { font-size: 18px; }
+    .tagline { font-size: 11px; letter-spacing: 4px; }
+    .countdown { gap: 48px; margin-top: 20px; }
+    .countdown-main .big { font-size: 48px; }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* TABS */
+  nav.tabs { 
+    background: var(--card); 
+    position: sticky; 
+    top: 0; 
+    z-index: 50; 
+    border-bottom: 1px solid var(--border); 
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+  }
+  nav.tabs .tabs-inner { 
+    display: flex; 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 20px;
+    justify-content: center;
+  }
+  nav.tabs button { 
+    background: transparent; 
+    border: none; 
+    padding: 16px 18px; 
+    font-size: 13px; 
+    font-weight: 500; 
+    color: var(--text-light); 
+    border-bottom: 2px solid transparent; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+  nav.tabs button.active { 
+    color: var(--primary); 
+    border-bottom-color: var(--primary); 
+  }
+  nav.tabs button:hover { 
+    color: var(--text); 
+  }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* CARDS */
+  .card { 
+    background: var(--card); 
+    border: 1.5px solid var(--border); 
+    border-radius: 28px; 
+    padding: 0;
+    margin-bottom: 32px; 
+    box-shadow: var(--shadow-sm); 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+  .card > *:not(.card-inner) {
+    padding: 0 28px;
+  }
+  .card > h2,
+  .card > h3,
+  .card > .toolbar,
+  .card > .items-list,
+  .card > .income-row,
+  .card > .charts-grid,
+  .card > .add-zone,
+  .card > #items-list,
+  .card > #incomes-list {
+    padding: 0 28px;
+  }
+  
+  .card > #incomes-list {
+    padding: 0 28px 28px 28px;
+  }
+  
+  .card > #items-list {
+    padding: 0 28px 28px 28px;
+  }
+  .card > :first-child {
+    padding-top: 28px;
+  }
+  .card > :last-child {
+    padding-bottom: 28px;
+  }
+  .card:hover {
+    box-shadow: var(--shadow);
+  }
+  .card h2 { 
+    font-size: 18px; 
+    font-weight: 500; 
+    margin-bottom: 16px; 
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+  .card h3 { 
+    font-size: 13px; 
+    font-weight: 500; 
+    margin-bottom: 12px; 
+    color: var(--text-light); 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+  }
+
+  /* DASHBOARD */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+  .stat .label { font-size: 11px; text-transform: uppercase; color: var(--text-light); letter-spacing: 0.5px; margin-bottom: 6px; font-weight: 600; }
+  .stat .value { font-size: 22px; font-weight: 700; color: var(--text); }
+  .stat .sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+  .stat.pink { background: linear-gradient(135deg, #fce4f0 0%, #fff 100%); border-color: #f2d0e0; }
+  .stat.mint { background: linear-gradient(135deg, #e0f0e8 0%, #fff 100%); border-color: #c8e0d4; }
+  .stat.cream { background: linear-gradient(135deg, #d4e6db 0%, #fff 100%); border-color: #c8dcc8; }
+  .stat.sand { background: linear-gradient(135deg, #d4e6db 0%, #fff 100%); border-color: #c8dcc8; }
+
+  /* PROGRESS BAR */
+  .progress-wrap { margin-top: 8px; }
+  .progress-bar .seg.paid { background: var(--sage); }
+  .progress-bar .seg.advance { background: var(--blush-light); }
+  .progress-bar .seg.planned { background: var(--blush); opacity: 0.6; }
+  .progress-legend { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 8px; font-size: 12px; color: var(--text-light); }
+  .progress-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: middle; }
+  .progress-legend .l-paid::before { background: var(--sage); }
+  .progress-legend .l-advance::before { background: var(--blush-light); }
+  .progress-legend .l-planned::before { background: var(--blush); }
+  .progress-legend .l-rest::before { background: var(--neutral); }
+
+  /* TABLE / LIST */
+  .items-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 14px;
+    width: 100%;
+    padding-bottom: 28px;
+  }
+  .item-row { 
+    display: grid; 
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1.2fr 0.9fr 0.3fr; 
+    gap: 8px; 
+    padding: 12px 14px; 
+    background: var(--card); 
+    border: 1px solid var(--border); 
+    border-radius: 12px; 
+    align-items: end; 
+    transition: all 0.15s; 
+    min-width: 0;
+    position: relative;
+    border-left: 4px solid transparent;
+  }
+  
+  .item-row.color-done { border-left-color: #4a8060; background: linear-gradient(135deg, rgba(212, 230, 219, 0.3) 0%, transparent 100%); }
+  .item-row.color-progress { border-left-color: #d97706; background: linear-gradient(135deg, rgba(217, 119, 6, 0.1) 0%, transparent 100%); }
+  .item-row.color-search { border-left-color: #d1d5db; background: #ffffff; }
+  
+  .item-row .color-indicator {
+    position: absolute;
+    top: 12px;
+    right: 44px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .item-row .link-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--text-light);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+  
+  .item-row .link-btn:hover { 
+    opacity: 1;
+    color: var(--primary);
+    transform: scale(1.15);
+  }
+  
+  .item-row .link-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .item-row .color-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  
+  .item-row .color-btn:hover { transform: scale(1.1); }
+  .item-row .color-btn.done { background: linear-gradient(135deg, #4a8060 0%, #70b084 100%); }
+  .item-row .color-btn.progress { background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); }
+  .item-row .color-btn.search { background: linear-gradient(135deg, #e5e7eb 0%, #f3f4f6 100%); border-color: #9ca3af; }
+  
+  .item-row .color-btn.done.active,
+  .item-row .color-btn.progress.active,
+  .item-row .color-btn.search.active { 
+    border-color: currentColor;
+    box-shadow: 0 0 0 2px var(--card);
+  }
+  .item-row > div {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .item-row > div:last-of-type {
+    padding-bottom: 2px;
+  }
+  .item-row:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .item-row .name { 
+    font-weight: 600; 
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .item-row .name .cat { display: block; font-size: 11px; color: var(--text-light); font-weight: 400; margin-top: 2px; }
+  .item-row input, .item-row select, .item-row textarea { width: 100%; padding: 5px 6px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); font-size: 13px; }
+  .item-row input:focus, .item-row select:focus, .item-row textarea:focus { outline: none; border-color: var(--primary); background: #fff; }
+  .item-row .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .status-badge { padding: 4px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; text-align: center; white-space: nowrap; }
+  .status-planned { background: #f0e9e2; color: #8a7a70; }
+  .status-chosen { background: #f5e0d5; color: #b07050; }
+  .status-prepaid { background: #d4e6db; color: #3a6a50; }
+  .status-paid { background: #d8ecdf; color: #4a8060; }
+  .status-done { background: #c8e0d4; color: #2a6048; }
+  .btn { padding: 10px 16px; border-radius: 14px; border: none; font-size: 13px; font-weight: 600; transition: all 0.15s; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: #e8936f; transform: translateY(-2px); box-shadow: var(--shadow); }
+  .btn-ghost { background: transparent; color: var(--text-light); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--primary); border-color: var(--primary); }
+  .btn-mint { background: var(--sage); color: #fff; }
+  .btn-warning { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+  .btn-warning:hover { background: #fde68a; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(252, 211, 77, 0.3); }
+  .btn-danger { background: transparent; color: var(--danger); border: 1px solid #f0d0d0; }
+  .btn-danger:hover { background: #fde8e8; }
+  .btn-icon { width: 36px; height: 36px; padding: 0; border-radius: 8px; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: var(--text-light); border: none; cursor: pointer; transition: all 0.2s; }
+  .btn-icon:hover { color: var(--primary); background: rgba(90, 122, 110, 0.08); }
+
+  .toolbar { 
+    display: grid; 
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 16px; 
+    align-items: center;
+    width: 100%;
+  }
+  .toolbar-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+  }
+  .toolbar .grow { flex: 1; }
+  .toolbar input[type="text"], .toolbar select { 
+    padding: 10px 12px; 
+    border: 1px solid var(--border); 
+    border-radius: 14px; 
+    background: #fff;
+    font-size: 14px;
+    height: 42px;
+    box-sizing: border-box;
+  }
+  .toolbar .btn {
+    padding: 0 22px;
+    font-size: 13px;
+    border-radius: 14px;
+    white-space: nowrap;
+    height: 42px;
+    box-sizing: border-box;
+  }
+
+  /* INCOMES */
+  .income-row { display: grid; grid-template-columns: 1fr 1.4fr 1fr 0.8fr 1fr 0.4fr; gap: 12px; padding: 14px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; align-items: center; }
+  .income-row input, .income-row select { width: 100%; padding: 6px 8px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); }
+  .income-row .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* CHARTS */
+  .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 18px; box-shadow: var(--shadow); }
+  .chart-card h3 { color: var(--text); font-size: 14px; font-weight: 600; margin-bottom: 12px; text-transform: none; letter-spacing: 0; }
+  .chart-card canvas { max-height: 260px !important; }
+
+  /* SETTINGS */
+  .settings-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    padding: 24px 0; 
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border); 
+  }
+  .settings-row:last-child { 
+    border-bottom: none; 
+    margin-bottom: 0;
+  }
+  .settings-row .label { font-size: 14px; margin-right: 32px; }
+  .settings-row .label .desc { font-size: 12px; color: var(--text-light); margin-top: 8px; }
+  .settings-row input[type="number"], .settings-row input[type="date"] { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: #fff; min-width: 140px; text-align: right; }
+
+  /* MOBILE */
+  @media (max-width: 720px) {
+    header { padding: 22px 16px 20px; }
+    .countdown-main .big { font-size: 32px; }
+    .countdown-date { width: 100%; text-align: left; margin-left: 0; }
+    .item-row { grid-template-columns: 1fr 1fr; gap: 6px; padding: 12px; }
+    .item-row .name { grid-column: span 2; }
+    .item-row .full { grid-column: span 2; }
+    .income-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .income-row > * { grid-column: span 1; }
+    .income-row .full { grid-column: span 2; }
+    .stat .value { font-size: 18px; }
+  }
+
+  .empty { text-align: center; color: var(--text-light); padding: 30px; font-size: 14px; }
+
+  .add-zone { display: flex; gap: 12px; flex-wrap: wrap; padding: 16px; background: transparent; border: none; border-radius: 14px; margin: 12px 0; align-items: center; }
+  .add-zone input, .add-zone select { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: #fff; flex: 1; min-width: 140px; }
+
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(50,40,40,0.4); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+  .modal-bg.show { display: flex; }
+  .modal { background: #fff; border-radius: 16px; padding: 24px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+  .modal h3 { font-size: 16px; margin-bottom: 12px; }
+  .modal p { color: var(--text-light); font-size: 14px; margin-bottom: 16px; }
+  .modal .actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--text); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 13px; z-index: 200; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+
+  details { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; margin-top: 6px; font-size: 12px; }
+  details summary { cursor: pointer; color: var(--text-light); font-weight: 500; }
+  details textarea { width: 100%; margin-top: 8px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 8px; background: #fff; min-height: 60px; resize: vertical; font-family: inherit; }
+
+  /* CALENDAR */
+  .cal-toolbar { display: flex; align-items: center; justify-content: center; gap: 48px; margin-bottom: 24px; flex-wrap: wrap; }
+  .cal-month-control { display: flex; align-items: center; gap: 16px; }
+  .cal-month-display {  font-size: 24px;  font-weight: 400; color: var(--text); text-align: center; letter-spacing: 0.5px; }
+  .btn-icon.cal-nav { 
+    width: 36px; 
+    height: 36px; 
+    font-size: 18px; 
+    color: var(--primary); 
+    border: none;
+    background: transparent; 
+    line-height: 1; 
+    border-radius: 6px; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-  }
-  
-  .password-screen.hidden {
-    display: none;
-  }
-  
-  .password-container {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 60px 40px;
-    box-shadow: 0 8px 24px rgba(244, 168, 149, 0.12);
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-  }
-  
-  .heart { font-size: 48px; margin-bottom: 15px; display: block; }
-  h1 { font-size: 32px; font-weight: 300; color: #f4a895; margin-bottom: 10px; letter-spacing: 1px; }
-  .subtitle { font-size: 14px; color: #6b5a52; margin-bottom: 30px; }
-  
-  .password-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  input[type="password"] {
-    padding: 14px 16px;
-    border: 2px solid #e8dfd8;
-    border-radius: 10px;
-    font-size: 16px;
-    font-family: inherit;
-    transition: all 0.3s;
-  }
-  
-  input[type="password"]:focus {
-    outline: none;
-    border-color: #f4a895;
-    box-shadow: 0 0 0 3px rgba(244, 168, 149, 0.1);
-  }
-  
-  button {
-    padding: 14px 24px;
-    background: #f4a895;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
   }
-  
-  button:hover {
-    background: #ffa07a;
-    transform: translateY(-2px);
+  .btn-icon.cal-nav:hover { 
+    background: rgba(90, 122, 110, 0.08);
+    transform: scale(1.12);
   }
-  
-  .error { color: #dc2626; font-size: 13px; margin-top: 10px; display: none; }
-  .error.show { display: block; }
-  .info { font-size: 12px; color: #6b5a52; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e8dfd8; }
-  
-  #main-content { display: none; }
-  #main-content.visible { display: block; }
+  .cal-jumps { display: flex; gap: 12px; }
+  .cal-jumps .btn { padding: 10px 22px; font-size: 13px; border-radius: 12px; }
+  .cal-legend { display: flex; flex-wrap: wrap; gap: 20px 32px; margin-bottom: 24px; font-size: 13px; color: var(--text-light); align-items: center; padding: 18px 24px; background: var(--bg); border-radius: 16px; border: 1px solid var(--border); justify-content: center; }
+  .legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+  .legend-dot.wedding { background: var(--accent); box-shadow: 0 0 0 2px var(--accent-light); }
+  .legend-dot.deadline { background: var(--blush); }
+  .legend-dot.income { background: var(--sage); }
+  .legend-dot.cushion { background: var(--neutral); border: 1px solid #95b8a3; }
+
+  .cal-grid { display: flex; justify-content: center; }
+  .cal-month { background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; width: 100%; max-width: 520px; }
+  .cal-month-title { font-size: 16px; font-weight: 500; margin-bottom: 22px; text-align: center; color: var(--primary); text-transform: capitalize; letter-spacing: 0.3px;  font-size: 22px;  line-height: 1; font-weight: 400; }
+  .cal-days-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 11px; color: var(--text-light); text-transform: uppercase; margin-bottom: 14px; text-align: center; font-weight: 500; letter-spacing: 1px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 1fr; gap: 6px; flex: 1; }
+  .cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; border-radius: 12px; cursor: pointer; position: relative; background: transparent; color: var(--text); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); user-select: none; border: 1px solid transparent; }
+  .cal-day:hover { background: rgba(90, 74, 110, 0.08); border-color: var(--border); }
+  .cal-day.empty { visibility: hidden; cursor: default; }
+  .cal-day.weekend { color: var(--text-light); }
+  .cal-day.today { color: var(--accent); font-weight: 700; border: 1.5px solid var(--accent); background: rgba(217, 135, 109, 0.08); }
+  .cal-day.has-event { font-weight: 600; }
+  .cal-day .dots { position: absolute; bottom: 5px; left: 0; right: 0; display: flex; justify-content: center; gap: 3px; pointer-events: none; }
+  .cal-day .dots i { display: block; width: 3px; height: 3px; border-radius: 50%; }
+  .cal-day .dots i.deadline { background: var(--blush); }
+  .cal-day .dots i.income { background: var(--sage); }
+  .cal-day .dots i.cushion { background: var(--accent); }
+  .cal-day.wedding { background: linear-gradient(135deg, var(--accent), #c86d57); color: #fff; font-weight: 600; box-shadow: 0 4px 12px rgba(217, 135, 109, 0.3); border: none; }
+  .cal-day.wedding::before { content: "♥"; position: absolute; top: 5px; right: 7px; font-size: 10px; color: #fff; opacity: 1; text-shadow: 0 1px 2px rgba(80, 30, 40, 0.35); pointer-events: none; }
+  .cal-day.wedding .dots { display: none; }
+  .cal-day.wedding:hover { background: linear-gradient(135deg, #c86d57, var(--accent)); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(217, 135, 109, 0.4); }
+  .cal-day.selected { outline: 2px solid var(--primary); outline-offset: -2px; }
+  .cal-day.selected:not(.wedding) { background: rgba(90, 74, 110, 0.1); }
+  .cal-day.selected.wedding { outline-color: #fff; outline-offset: -3px; }
+
+  .cal-tip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text);
+    color: #fff;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 11.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
+    white-space: normal;
+    width: max-content;
+    max-width: 240px;
+    min-width: 130px;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 30;
+    box-shadow: 0 8px 24px rgba(40, 30, 30, 0.25);
+    transition: opacity 0.12s ease, visibility 0.12s;
+  }
+  .cal-tip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--text);
+  }
+  .cal-day:hover .cal-tip { opacity: 1; visibility: visible; }
+  .cal-tip-line { display: flex; align-items: center; gap: 6px; }
+  .cal-tip-line + .cal-tip-line { margin-top: 5px; padding-top: 5px; border-top: 1px solid rgba(255,255,255,0.12); }
+  .cal-tip-icon { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .cal-tip-icon.deadline { background: var(--blush); }
+  .cal-tip-icon.income { background: var(--sage); }
+  .cal-tip-icon.cushion { background: var(--neutral); }
+  .cal-tip-icon.wedding { background: #fff; box-shadow: 0 0 0 2px var(--accent); }
+  .cal-tip-name { flex: 1; min-width: 0; word-break: break-word; }
+  .cal-tip-amt { color: rgba(255,255,255,0.75); font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 10.5px; margin-left: 6px; }
+
+  /* Tooltip flips for edge cells */
+  .cal-day:nth-child(7n+1) .cal-tip { left: 0; transform: none; }
+  .cal-day:nth-child(7n+1) .cal-tip::after { left: 18px; transform: none; }
+  .cal-day:nth-child(7n) .cal-tip { left: auto; right: 0; transform: none; }
+  .cal-day:nth-child(7n) .cal-tip::after { left: auto; right: 18px; transform: none; }
+
+  .cal-details-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .cal-details-head h3 { font-size: 16px; font-weight: 600; margin: 0; color: var(--text); text-transform: none; letter-spacing: 0; }
+  .event-row { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; margin-bottom: 8px; background: var(--bg); border-left: 3px solid var(--border); }
+  .event-row.deadline { border-left-color: var(--blush); background: linear-gradient(to right, #fce4f0 0%, var(--bg) 100%); }
+  .event-row.income { border-left-color: var(--sage); background: linear-gradient(to right, #d5e0cc 0%, var(--bg) 100%); }
+  .event-row.cushion { border-left-color: #95b8a3; background: linear-gradient(to right, #d4e6db 0%, var(--bg) 100%); }
+  .event-row.wedding { border-left-color: var(--accent); background: linear-gradient(135deg, #fde4e7 0%, #fff 100%); }
+  .event-tag { font-size: 10px; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  .event-tag.deadline { background: #fce4f0; color: var(--primary); }
+  .event-tag.income { background: #d5e0cc; color: #3a5a30; }
+  .event-tag.cushion { background: #d4e6db; color: #3a6a50; }
+  .event-tag.wedding { background: var(--accent); color: #fff; }
+  .event-body { flex: 1; }
+  .event-title { font-weight: 600; font-size: 14px; }
+  .event-meta { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+  .event-amt { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  @media (max-width: 1100px) {
+    .cal-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 820px) {
+    .cal-month { padding: 16px; }
+    .cal-month-title { font-size: 16px; }
+    .cal-days-header { font-size: 8px; }
+    .cal-day { font-size: 11px; border-radius: 6px; }
+    .cal-day.wedding::before { font-size: 9px; top: 2px; right: 3px; }
+  }
+  @media (max-width: 420px) {
+    .cal-grid { grid-template-columns: 1fr; }
+    .cal-jumps .btn { padding: 7px 10px; font-size: 12px; }
+  }
+
+  .cat-row { display: flex; gap: 8px; align-items: center; padding: 8px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }
+  .cat-row .cat-name { flex: 1; font-size: 14px; font-weight: 500; }
+  .cat-row .cat-name.is-custom { color: var(--primary); }
+  .cat-row input { flex: 1; padding: 6px 10px; border: 1px solid var(--primary); border-radius: 8px; background: #fff; }
+  .cat-row .badge { font-size: 10px; padding: 2px 8px; border-radius: 999px; background: var(--neutral); color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+  .cat-row .badge.custom { background: #fce4f0; color: var(--primary); }
+  .btn-icon.edit:hover { color: var(--primary); border-color: var(--primary); }
+  .cat-usage { font-size: 11px; color: var(--text-light); }
 </style>
+
+  <style>
+    .password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #faf8f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+    }
+    .password-overlay.hidden { display: none; }
+    .password-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 60px 40px;
+      box-shadow: 0 8px 24px rgba(244, 168, 149, 0.12);
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+    }
+    .password-box h1 { font-size: 32px; color: #f4a895; margin-bottom: 30px; }
+    .password-box input { width: 100%; padding: 12px; border: 2px solid #e8dfd8; border-radius: 10px; font-size: 16px; margin-bottom: 15px; }
+    .password-box input:focus { outline: none; border-color: #f4a895; }
+    .password-box button { width: 100%; padding: 12px; background: #f4a895; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: 600; }
+    .password-box button:hover { background: #ffa07a; }
+    .password-error { color: #dc2626; font-size: 13px; margin-top: 10px; display: none; }
+    .password-error.show { display: block; }
+  </style>
+  <div class="password-overlay" id="pwd-overlay">
+    <div class="password-box">
+      <h1>💕 Misha & Nastya</h1>
+      <form id="pwd-form" onsubmit="checkPassword(event); return false;">
+        <input type="password" id="pwd-input" placeholder="Введи пароль..." required>
+        <button type="submit">🔓 Открыть</button>
+        <div class="password-error" id="pwd-error">❌ Неправильный пароль</div>
+      </form>
+    </div>
+  </div>
+  <script>
+    const PWD = "awx2kdh8QWD6rjk!whg";
+    function checkPassword(e) {
+      const pwd = document.getElementById('pwd-input').value;
+      if (pwd === PWD) {
+        localStorage.setItem('wedding_pass', '1');
+        document.getElementById('pwd-overlay').classList.add('hidden');
+      } else {
+        document.getElementById('pwd-error').classList.add('show');
+        document.getElementById('pwd-input').value = '';
+      }
+    }
+    if (localStorage.getItem('wedding_pass') === '1') {
+      document.getElementById('pwd-overlay').classList.add('hidden');
+    }
+    document.getElementById('pwd-input').focus();
+  </script>
+
 </head>
 <body>
 
-<div class="password-screen" id="password-screen">
-  <div class="password-container">
-    <div class="password-header">
-      <span class="heart">💕</span>
-      <h1>Misha & Nastya</h1>
-      <p class="subtitle">Big Day & Beyond</p>
+<header>
+  <div class="header-deco">
+    <!-- rings -->
+    <svg class="d1" viewBox="0 0 80 40" fill="none"><circle cx="20" cy="20" r="16" stroke="white" stroke-width="2.5"/><circle cx="44" cy="20" r="16" stroke="white" stroke-width="2.5"/></svg>
+    <!-- dots grid top right -->
+    <svg class="d2" viewBox="0 0 65 40" fill="white"><circle cx="8" cy="8" r="2.5"/><circle cx="22" cy="8" r="2.5"/><circle cx="36" cy="8" r="2.5"/><circle cx="50" cy="8" r="2.5"/><circle cx="8" cy="22" r="2.5"/><circle cx="22" cy="22" r="2.5"/><circle cx="36" cy="22" r="2.5"/><circle cx="50" cy="22" r="2.5"/><circle cx="8" cy="36" r="2.5"/><circle cx="22" cy="36" r="2.5"/><circle cx="36" cy="36" r="2.5"/><circle cx="50" cy="36" r="2.5"/></svg>
+    <!-- small flower top left zone -->
+    <svg class="d3" viewBox="0 0 30 30" fill="white"><ellipse cx="15" cy="5" rx="4" ry="7"/><ellipse cx="15" cy="25" rx="4" ry="7"/><ellipse cx="5" cy="15" rx="7" ry="4"/><ellipse cx="25" cy="15" rx="7" ry="4"/><circle cx="15" cy="15" r="4"/></svg>
+    <!-- small flower top right zone -->
+    <svg class="d4" viewBox="0 0 30 30" fill="white"><ellipse cx="15" cy="5" rx="4" ry="7"/><ellipse cx="15" cy="25" rx="4" ry="7"/><ellipse cx="5" cy="15" rx="7" ry="4"/><ellipse cx="25" cy="15" rx="7" ry="4"/><circle cx="15" cy="15" r="4"/></svg>
+    <!-- tiny diamond center-left top -->
+    <svg class="d5" viewBox="0 0 22 22" fill="white"><polygon points="11,0 22,11 11,22 0,11"/></svg>
+    <!-- tiny diamond center-right top -->
+    <svg class="d6" viewBox="0 0 22 22" fill="white"><polygon points="11,0 22,11 11,22 0,11"/></svg>
+    <!-- medium flower mid left -->
+    <svg class="d7" viewBox="0 0 42 42" fill="white"><ellipse cx="21" cy="6" rx="5" ry="9"/><ellipse cx="21" cy="36" rx="5" ry="9"/><ellipse cx="6" cy="21" rx="9" ry="5"/><ellipse cx="36" cy="21" rx="9" ry="5"/><ellipse cx="9" cy="9" rx="5" ry="9" transform="rotate(45 9 9)"/><ellipse cx="33" cy="33" rx="5" ry="9" transform="rotate(45 33 33)"/><ellipse cx="33" cy="9" rx="5" ry="9" transform="rotate(-45 33 9)"/><ellipse cx="9" cy="33" rx="5" ry="9" transform="rotate(-45 9 33)"/><circle cx="21" cy="21" r="5"/></svg>
+    <!-- medium flower mid right -->
+    <svg class="d8" viewBox="0 0 42 42" fill="white"><ellipse cx="21" cy="6" rx="5" ry="9"/><ellipse cx="21" cy="36" rx="5" ry="9"/><ellipse cx="6" cy="21" rx="9" ry="5"/><ellipse cx="36" cy="21" rx="9" ry="5"/><ellipse cx="9" cy="9" rx="5" ry="9" transform="rotate(45 9 9)"/><ellipse cx="33" cy="33" rx="5" ry="9" transform="rotate(45 33 33)"/><ellipse cx="33" cy="9" rx="5" ry="9" transform="rotate(-45 33 9)"/><ellipse cx="9" cy="33" rx="5" ry="9" transform="rotate(-45 9 33)"/><circle cx="21" cy="21" r="5"/></svg>
+    <!-- tiny circle cluster left -->
+    <svg class="d9" viewBox="0 0 26 26" fill="white"><circle cx="13" cy="4" r="3"/><circle cx="4" cy="13" r="3"/><circle cx="22" cy="13" r="3"/><circle cx="13" cy="22" r="3"/><circle cx="13" cy="13" r="3"/></svg>
+    <!-- tiny circle cluster right -->
+    <svg class="d10" viewBox="0 0 26 26" fill="white"><circle cx="13" cy="4" r="3"/><circle cx="4" cy="13" r="3"/><circle cx="22" cy="13" r="3"/><circle cx="13" cy="22" r="3"/><circle cx="13" cy="13" r="3"/></svg>
+    <!-- tiny leaf left-center -->
+    <svg class="d11" viewBox="0 0 20 20" fill="white"><path d="M10 1 Q18 10 10 19 Q2 10 10 1Z"/></svg>
+    <!-- tiny leaf right-center -->
+    <svg class="d12" viewBox="0 0 20 20" fill="white"><path d="M10 1 Q18 10 10 19 Q2 10 10 1Z"/></svg>
+    <!-- branch bottom left -->
+    <svg class="d13" viewBox="0 0 145 110" fill="none"><path d="M15 100 Q45 65 85 45 Q115 30 140 16" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M45 78 Q36 55 50 42" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M72 60 Q62 38 75 25" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M97 44 Q88 25 100 14" stroke="white" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="51" cy="41" rx="8" ry="5" fill="white" transform="rotate(-30 51 41)"/><ellipse cx="76" cy="24" rx="8" ry="5" fill="white" transform="rotate(-20 76 24)"/><ellipse cx="101" cy="13" rx="7" ry="4" fill="white" transform="rotate(-15 101 13)"/><ellipse cx="37" cy="54" rx="6" ry="4" fill="white" transform="rotate(20 37 54)"/></svg>
+    <!-- branch bottom right -->
+    <svg class="d14" viewBox="0 0 145 110" fill="none"><path d="M15 100 Q45 65 85 45 Q115 30 140 16" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M45 78 Q36 55 50 42" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M72 60 Q62 38 75 25" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M97 44 Q88 25 100 14" stroke="white" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="51" cy="41" rx="8" ry="5" fill="white" transform="rotate(-30 51 41)"/><ellipse cx="76" cy="24" rx="8" ry="5" fill="white" transform="rotate(-20 76 24)"/><ellipse cx="101" cy="13" rx="7" ry="4" fill="white" transform="rotate(-15 101 13)"/><ellipse cx="37" cy="54" rx="6" ry="4" fill="white" transform="rotate(20 37 54)"/></svg>
+    <!-- branch bottom center-left -->
+    <svg class="d15" viewBox="0 0 110 90" fill="none"><path d="M10 80 Q35 52 65 36 Q88 22 105 12" stroke="white" stroke-width="1.8" stroke-linecap="round"/><path d="M35 62 Q27 44 38 32" stroke="white" stroke-width="1.3" stroke-linecap="round"/><path d="M58 46 Q50 30 60 19" stroke="white" stroke-width="1.3" stroke-linecap="round"/><ellipse cx="39" cy="31" rx="7" ry="4" fill="white" transform="rotate(-25 39 31)"/><ellipse cx="61" cy="18" rx="6" ry="4" fill="white" transform="rotate(-18 61 18)"/></svg>
+    <!-- branch bottom center-right -->
+    <svg class="d16" viewBox="0 0 100 85" fill="none"><path d="M10 75 Q32 50 60 34 Q80 22 95 12" stroke="white" stroke-width="1.8" stroke-linecap="round"/><path d="M32 58 Q25 40 35 29" stroke="white" stroke-width="1.3" stroke-linecap="round"/><ellipse cx="36" cy="28" rx="6" ry="4" fill="white" transform="rotate(-25 36 28)"/></svg>
+    <!-- small flower bottom center -->
+    <svg class="d17" viewBox="0 0 28 28" fill="white"><ellipse cx="14" cy="4" rx="3" ry="6"/><ellipse cx="14" cy="24" rx="3" ry="6"/><ellipse cx="4" cy="14" rx="6" ry="3"/><ellipse cx="24" cy="14" rx="6" ry="3"/><circle cx="14" cy="14" r="4"/></svg>
+    <!-- tiny leaf bottom left-center -->
+    <svg class="d18" viewBox="0 0 18 18" fill="white"><path d="M9 1 Q16 9 9 17 Q2 9 9 1Z"/></svg>
+    <!-- tiny leaf bottom right-center -->
+    <svg class="d19" viewBox="0 0 18 18" fill="white"><path d="M9 1 Q16 9 9 17 Q2 9 9 1Z"/></svg>
+    <svg class="d20" viewBox="0 0 18 18" fill="white"><polygon points="9,0 18,9 9,18 0,9"/></svg>
+    <svg class="d21" viewBox="0 0 16 16" fill="white"><polygon points="8,0 16,8 8,16 0,8"/></svg>
+    <svg class="d22" viewBox="0 0 24 24" fill="white"><ellipse cx="12" cy="3" rx="4" ry="6"/><ellipse cx="12" cy="21" rx="4" ry="6"/><ellipse cx="3" cy="12" rx="6" ry="4"/><ellipse cx="21" cy="12" rx="6" ry="4"/><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="d23" viewBox="0 0 24 24" fill="white"><ellipse cx="12" cy="3" rx="4" ry="6"/><ellipse cx="12" cy="21" rx="4" ry="6"/><ellipse cx="3" cy="12" rx="6" ry="4"/><ellipse cx="21" cy="12" rx="6" ry="4"/><circle cx="12" cy="12" r="4"/></svg>
+  </div>
+  <div class="header-content">
+    <div class="header-text">
+      <div class="heart-accent">♥</div>
+      <div class="couple-names">Misha Nastya</div>
+      <div class="tagline">BIG DAY • BEYOND</div>
+    </div>
+
+    <div class="lang-switch">
+      <button data-lang="ua">UA</button>
+      <button data-lang="ru" class="active">RU</button>
+      <button data-lang="en">EN</button>
     </div>
     
-    <form class="password-form" id="password-form">
-      <input type="password" id="password-input" placeholder="Введи пароль..." autocomplete="off" required>
-      <button type="submit">🔓 Открыть планер</button>
-      <div class="error" id="error-msg">❌ Неправильный пароль</div>
-    </form>
-    
-    <div class="info">💡 Защита паролем включена</div>
+    <div class="save-indicator" id="save-indicator">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+        <polyline points="7 3 7 8 15 8"></polyline>
+      </svg>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;">
+        <span id="save-text" data-i18n="saved">Сохранено</span>
+        <span id="save-time" style="font-size:10px;opacity:0.7;margin-top:2px;">—</span>
+      </div>
+    </div>
+
+    <div class="countdown-main">
+      <span data-i18n="days_left">Дней до свадьбы</span>
+      <span class="big" id="days-left">—</span>
+    </div>
+
+    <div class="header-bottom">
+      <div class="countdown-date">
+        <div data-i18n="wedding_date">Дата свадьбы</div>
+        <div id="wedding-date-display">18.09.2026</div>
+      </div>
+      
+      <div class="color-switch">
+        <button class="color-btn" data-color="peach" data-i18n-title="theme_peach" title="Персик"></button>
+        <button class="color-btn" data-color="mint" data-i18n-title="theme_mint" title="Мятный"></button>
+        <button class="color-btn" data-color="coral" data-i18n-title="theme_coral" title="Коралл"></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-inner">
+    <button data-tab="dashboard" class="active" data-i18n="tab_dashboard">Дашборд</button>
+    <button data-tab="calendar" data-i18n="tab_calendar">Календарь</button>
+    <button data-tab="expenses" data-i18n="tab_expenses">Расходы</button>
+    <button data-tab="income" data-i18n="tab_income">Доходы</button>
+    <button data-tab="cushion" data-i18n="tab_cushion">Подушка</button>
+    <button data-tab="charts" data-i18n="tab_charts">Графики</button>
+    <button data-tab="guests" data-i18n="tab_guests">Гости</button>
+    <button data-tab="settings" data-i18n="tab_settings">Настройки</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- DASHBOARD -->
+  <section class="panel active" id="panel-dashboard">
+    <div class="stats-grid">
+      <div class="stat pink">
+        <div class="label" data-i18n="budget_total">Бюджет</div>
+        <div class="value" id="stat-budget">—</div>
+        <div class="sub" data-i18n="goal">цель</div>
+      </div>
+      <div class="stat mint">
+        <div class="label" data-i18n="paid">Оплачено</div>
+        <div class="value" id="stat-paid">—</div>
+        <div class="sub" id="stat-paid-pct">—</div>
+      </div>
+      <div class="stat cream">
+        <div class="label" data-i18n="advance">Авансы</div>
+        <div class="value" id="stat-advance">—</div>
+        <div class="sub" data-i18n="reserved">зарезервировано</div>
+      </div>
+      <div class="stat sand">
+        <div class="label" data-i18n="left_to_pay">Осталось доплатить</div>
+        <div class="value" id="stat-rest">—</div>
+        <div class="sub" id="stat-rest-sub">—</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="budget_progress">Прогресс по бюджету</h3>
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="seg paid" id="bar-paid" style="width:0%"></div>
+          <div class="seg advance" id="bar-advance" style="width:0%"></div>
+          <div class="seg planned" id="bar-planned" style="width:0%"></div>
+        </div>
+        <div class="progress-legend">
+          <span class="l-paid" data-i18n="paid">Оплачено</span>
+          <span class="l-advance" data-i18n="advance">Аванс</span>
+          <span class="l-planned" data-i18n="planned">Запланировано</span>
+          <span class="l-rest" data-i18n="free">Свободно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="label" data-i18n="income_total">Накоплено</div>
+        <div class="value" id="stat-income">—</div>
+        <div class="sub" id="stat-income-sub">—</div>
+      </div>
+      <div class="stat">
+        <div class="label" data-i18n="balance">Баланс</div>
+        <div class="value" id="stat-balance">—</div>
+        <div class="sub" data-i18n="income_minus_paid">накоплено − оплачено</div>
+      </div>
+      <div class="stat">
+        <div class="label" data-i18n="need_more">Нужно ещё</div>
+        <div class="value" id="stat-need">—</div>
+        <div class="sub" data-i18n="to_full_budget">до полного бюджета</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="upcoming_payments">Ближайшие доплаты</h3>
+      <div id="upcoming-payments"></div>
+    </div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="panel" id="panel-calendar">
+    <div class="card">
+      <div class="cal-toolbar">
+        <div class="cal-month-control">
+          <button class="btn-icon cal-nav" id="cal-prev-year" title="←">‹</button>
+          <div class="cal-month-display" id="cal-year">Сентябрь 2026</div>
+          <button class="btn-icon cal-nav" id="cal-next-year" title="→">›</button>
+        </div>
+        <div class="cal-jumps">
+          <button class="btn btn-ghost" id="cal-go-today" data-i18n="cal_jump_today">Сегодня</button>
+          <button class="btn btn-primary" id="cal-go-wedding" data-i18n="cal_jump_wedding">К свадьбе</button>
+        </div>
+      </div>
+      <div class="cal-legend">
+        <span class="legend-dot wedding"></span><span data-i18n="cal_legend_wedding">Свадьба</span>
+        <span class="legend-dot deadline"></span><span data-i18n="cal_legend_deadline">Дедлайн оплаты</span>
+        <span class="legend-dot income"></span><span data-i18n="cal_legend_income">Доход</span>
+        <span class="legend-dot cushion"></span><span data-i18n="cal_legend_cushion">Подушка</span>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+
+    <div class="card" id="cal-details" style="display:none;">
+      <div class="cal-details-head">
+        <h3 id="cal-selected-title">—</h3>
+        <button class="btn-icon" id="cal-close-details" title="×">×</button>
+      </div>
+      <div id="cal-events-list"></div>
+    </div>
+  </section>
+
+  <!-- EXPENSES -->
+  <section class="panel" id="panel-expenses">
+    <div class="card">
+      <h2 data-i18n="expenses_title">Расходы и план</h2>
+      <div class="toolbar">
+        <input type="text" id="search-items" placeholder="" data-i18n-placeholder="search">
+        <div class="toolbar-row">
+          <select id="filter-status">
+            <option value="" data-i18n="all_statuses">Все статусы</option>
+            <option value="planned" data-i18n="status_planned">Запланировано</option>
+            <option value="chosen" data-i18n="status_chosen">Выбрали подрядчика</option>
+            <option value="prepaid" data-i18n="status_prepaid">Внесён аванс</option>
+            <option value="paid" data-i18n="status_paid">Оплачено</option>
+            <option value="done" data-i18n="status_done">Выполнено</option>
+          </select>
+          <select id="filter-category">
+            <option value="" data-i18n="all_categories">Все категории</option>
+          </select>
+          <div></div>
+          <button class="btn btn-primary" id="btn-add-item">+ <span data-i18n="add_item">Добавить</span></button>
+        </div>
+      </div>
+      <div class="items-list" id="items-list"></div>
+    </div>
+  </section>
+
+  <!-- INCOME -->
+  <section class="panel" id="panel-income">
+    <div class="card">
+      <h2 data-i18n="income_title">Доходы и накопления</h2>
+      <div class="add-zone" id="add-income-zone">
+        <input type="date" id="inc-date">
+        <input type="text" id="inc-source" data-i18n-placeholder="income_source_ph">
+        <input type="number" id="inc-amount" step="0.01" placeholder="0">
+        <select id="inc-currency">
+          <option value="UAH">UAH ₴</option>
+          <option value="USD">USD $</option>
+          <option value="EUR">EUR €</option>
+        </select>
+        <input type="number" id="inc-rate" step="0.01" data-i18n-placeholder="rate_to_uah_placeholder" placeholder="курс → UAH" style="max-width:130px;">
+        <button class="btn btn-mint" id="btn-add-income">+ <span data-i18n="add_income">Добавить</span></button>
+      </div>
+      <div style="height:14px"></div>
+      <div class="items-list" id="incomes-list"></div>
+    </div>
+  </section>
+
+  <!-- CUSHION -->
+  <section class="panel" id="panel-cushion">
+    <div class="stats-grid">
+      <div class="stat mint">
+        <div class="label" data-i18n="cushion_goal">Цель</div>
+        <div class="value" id="cushion-goal-display">—</div>
+        <div class="sub" data-i18n="cushion_after_wedding">после свадьбы</div>
+      </div>
+      <div class="stat pink">
+        <div class="label" data-i18n="cushion_saved">Накоплено</div>
+        <div class="value" id="cushion-saved">—</div>
+        <div class="sub" id="cushion-saved-pct">—</div>
+      </div>
+      <div class="stat cream">
+        <div class="label" data-i18n="cushion_left">Осталось</div>
+        <div class="value" id="cushion-left">—</div>
+        <div class="sub" id="cushion-monthly-need">—</div>
+      </div>
+      <div class="stat sand">
+        <div class="label" data-i18n="cushion_deposits_count">Пополнений</div>
+        <div class="value" id="cushion-count">—</div>
+        <div class="sub" id="cushion-last">—</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="cushion_progress">Прогресс к цели</h3>
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="seg paid" id="cushion-bar" style="width:0%"></div>
+        </div>
+        <div class="progress-legend">
+          <span class="l-paid" data-i18n="cushion_saved">Накоплено</span>
+          <span class="l-rest" data-i18n="cushion_left">Осталось</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="cushion_settings">Настройки цели</h2>
+      <div class="settings-row">
+        <div class="label">
+          <div data-i18n="cushion_goal_amount">Сумма цели</div>
+          <div class="desc" data-i18n="cushion_goal_desc">Сколько хочется отложить как подушку безопасности</div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <input type="number" id="cushion-goal-amount" step="100" style="width:120px;">
+          <select id="cushion-goal-currency" style="padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff;">
+            <option value="USD">USD $</option>
+            <option value="EUR">EUR €</option>
+            <option value="UAH">UAH ₴</option>
+          </select>
+        </div>
+      </div>
+      <div class="settings-row">
+        <div class="label">
+          <div data-i18n="cushion_rate">Текущий курс UAH → валюта цели</div>
+          <div class="desc" data-i18n="cushion_rate_desc">Используется чтобы пересчитать вклады в гривнах в валюту цели</div>
+        </div>
+        <input type="number" id="cushion-rate" step="0.01" style="width:120px;">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="cushion_deposits">Пополнения</h2>
+      <div class="add-zone" id="add-cushion-zone">
+        <input type="date" id="cdep-date">
+        <input type="text" id="cdep-note" data-i18n-placeholder="cushion_note_ph">
+        <input type="number" id="cdep-amount" step="0.01" placeholder="0">
+        <select id="cdep-currency">
+          <option value="USD">USD $</option>
+          <option value="EUR">EUR €</option>
+          <option value="UAH">UAH ₴</option>
+        </select>
+        <input type="number" id="cdep-rate" step="0.01" data-i18n-placeholder="rate_to_uah_placeholder" placeholder="курс → UAH" style="max-width:130px;">
+        <button class="btn btn-mint" id="btn-add-cushion-dep">+ <span data-i18n="cushion_add_dep">Добавить</span></button>
+      </div>
+      <div class="items-list" id="cushion-list"></div>
+    </div>
+  </section>
+
+  <!-- CHARTS -->
+  <section class="panel" id="panel-charts">
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3 data-i18n="chart_by_category">Структура расходов по категориям</h3>
+        <canvas id="chart-categories"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 data-i18n="chart_status">По статусам оплаты</h3>
+        <canvas id="chart-status"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 data-i18n="chart_paid_vs_rest">Оплачено vs к доплате (топ категорий)</h3>
+        <canvas id="chart-paid-rest"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 data-i18n="chart_income_timeline">Накопления во времени</h3>
+        <canvas id="chart-income-timeline"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3 data-i18n="chart_cushion_timeline">Подушка во времени</h3>
+        <canvas id="chart-cushion-timeline"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUESTS -->
+  <section class="panel" id="panel-guests">
+    <div class="card">
+      <h2 data-i18n="tab_guests">💑 Гости</h2>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <!-- Nastya's guests -->
+        <div>
+          <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;color:var(--text);">👰 Nastya</h3>
+          
+          <div style="margin-bottom:20px;">
+            <h4 style="font-size:13px;font-weight:600;color:var(--text-light);margin-bottom:10px;text-transform:uppercase;" data-i18n="guest_confirmed">✓ Точно будут</h4>
+            <div style="display:flex;gap:8px;margin-bottom:10px;">
+              <input type="text" id="inp-nastya-yes" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;" data-i18n-placeholder="guest_name" placeholder="Имя">
+              <button id="btn-nastya-yes" style="padding:8px 14px;background:var(--primary);color:white;border:none;border-radius:8px;font-size:13px;cursor:pointer;">+</button>
+            </div>
+            <div id="list-nastya-yes" style="display:flex;flex-wrap:wrap;gap:6px;min-height:20px;"></div>
+          </div>
+          
+          <div>
+            <h4 style="font-size:13px;font-weight:600;color:var(--text-light);margin-bottom:10px;text-transform:uppercase;" data-i18n="guest_maybe">? Под вопросом</h4>
+            <div style="display:flex;gap:8px;margin-bottom:10px;">
+              <input type="text" id="inp-nastya-maybe" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;" data-i18n-placeholder="guest_name" placeholder="Имя">
+              <button id="btn-nastya-maybe" style="padding:8px 14px;background:var(--primary);color:white;border:none;border-radius:8px;font-size:13px;cursor:pointer;">+</button>
+            </div>
+            <div id="list-nastya-maybe" style="display:flex;flex-wrap:wrap;gap:6px;min-height:20px;"></div>
+          </div>
+        </div>
+        
+        <!-- Misha's guests -->
+        <div>
+          <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;color:var(--text);">🤵 Misha</h3>
+          
+          <div style="margin-bottom:20px;">
+            <h4 style="font-size:13px;font-weight:600;color:var(--text-light);margin-bottom:10px;text-transform:uppercase;" data-i18n="guest_confirmed">✓ Точно будут</h4>
+            <div style="display:flex;gap:8px;margin-bottom:10px;">
+              <input type="text" id="inp-misha-yes" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;" data-i18n-placeholder="guest_name" placeholder="Имя">
+              <button id="btn-misha-yes" style="padding:8px 14px;background:var(--primary);color:white;border:none;border-radius:8px;font-size:13px;cursor:pointer;">+</button>
+            </div>
+            <div id="list-misha-yes" style="display:flex;flex-wrap:wrap;gap:6px;min-height:20px;"></div>
+          </div>
+          
+          <div>
+            <h4 style="font-size:13px;font-weight:600;color:var(--text-light);margin-bottom:10px;text-transform:uppercase;" data-i18n="guest_maybe">? Под вопросом</h4>
+            <div style="display:flex;gap:8px;margin-bottom:10px;">
+              <input type="text" id="inp-misha-maybe" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;" data-i18n-placeholder="guest_name" placeholder="Имя">
+              <button id="btn-misha-maybe" style="padding:8px 14px;background:var(--primary);color:white;border:none;border-radius:8px;font-size:13px;cursor:pointer;">+</button>
+            </div>
+            <div id="list-misha-maybe" style="display:flex;flex-wrap:wrap;gap:6px;min-height:20px;"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- GUEST COUNTER -->
+      <div style="margin-top:28px;">
+        <!-- Big total -->
+        <div style="text-align:center;padding:28px 20px 20px;background:linear-gradient(135deg,var(--primary-light) 0%,var(--blush-light) 100%);border-radius:24px;margin-bottom:16px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-18px;left:-18px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.15);pointer-events:none;"></div>
+          <div style="position:absolute;bottom:-24px;right:-18px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,0.12);pointer-events:none;"></div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);margin-bottom:6px;" data-i18n="guests_total">Всего</div>
+          <div id="total-guests" style="font-size:64px;font-weight:300;color:var(--text);line-height:1;">0</div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;" data-i18n="tab_guests">гостей</div>
+        </div>
+
+        <!-- Per-person counters -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <!-- Nastya block -->
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px 20px;">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;">👰 Nastya</div>
+            <div style="display:flex;gap:10px;">
+              <div style="flex:1;background:#f5e5e0;border-radius:14px;padding:12px 10px;text-align:center;">
+                <div style="font-size:22px;font-weight:500;color:#c87a5f;line-height:1;" id="count-ny">0</div>
+                <div style="font-size:10px;color:#d99070;margin-top:4px;font-weight:500;letter-spacing:0.5px;">✓</div>
+              </div>
+              <div style="flex:1;background:#fffbf0;border-radius:14px;padding:12px 10px;text-align:center;">
+                <div style="font-size:22px;font-weight:500;color:#b07a20;line-height:1;" id="count-nm">0</div>
+                <div style="font-size:10px;color:#c9973a;margin-top:4px;font-weight:500;letter-spacing:0.5px;">?</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Misha block -->
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px 20px;">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;">🤵 Misha</div>
+            <div style="display:flex;gap:10px;">
+              <div style="flex:1;background:#f5e5e0;border-radius:14px;padding:12px 10px;text-align:center;">
+                <div style="font-size:22px;font-weight:500;color:#c87a5f;line-height:1;" id="count-my">0</div>
+                <div style="font-size:10px;color:#d99070;margin-top:4px;font-weight:500;letter-spacing:0.5px;">✓</div>
+              </div>
+              <div style="flex:1;background:#fffbf0;border-radius:14px;padding:12px 10px;text-align:center;">
+                <div style="font-size:22px;font-weight:500;color:#b07a20;line-height:1;" id="count-mm">0</div>
+                <div style="font-size:10px;color:#c9973a;margin-top:4px;font-weight:500;letter-spacing:0.5px;">?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CARPOOLING -->
+      <div style="margin-top:28px;padding-top:28px;border-top:1px solid var(--border);">
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;color:var(--text);" data-i18n="carpooling">🚗 Carpooling</h3>
+        
+        <div style="margin-bottom:16px;">
+          <div style="display:flex;gap:8px;margin-bottom:12px;">
+            <input type="text" id="inp-car-name" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;" data-i18n-placeholder="driver_name" placeholder="Имя водителя">
+            <input type="text" id="inp-car-model" style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;" data-i18n-placeholder="car_model" placeholder="Модель авто">
+            <input type="number" id="inp-car-seats" min="1" max="9" value="4" style="width:60px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;" data-i18n-placeholder="seats" placeholder="Мест">
+            <button id="btn-add-car" style="padding:8px 14px;background:var(--primary);color:white;border:none;border-radius:8px;font-size:13px;cursor:pointer;" data-i18n="add_car">+ Авто</button>
+          </div>
+        </div>
+        
+        <div id="cars-list" style="display:flex;flex-direction:column;gap:12px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="panel" id="panel-settings">
+    <div class="card">
+      <h2 data-i18n="settings_general">Общие настройки</h2>
+      <div class="settings-row">
+        <div class="label">
+          <div data-i18n="setting_budget">Общий бюджет (UAH)</div>
+          <div class="desc" data-i18n="setting_budget_desc">Общая цель — сколько готовы потратить</div>
+        </div>
+        <input type="number" id="set-budget" step="1000">
+      </div>
+      <div class="settings-row">
+        <div class="label">
+          <div data-i18n="setting_date">Дата свадьбы</div>
+          <div class="desc" data-i18n="setting_date_desc">Используется для отсчёта дней</div>
+        </div>
+        <input type="date" id="set-date">
+      </div>
+      <div class="settings-row">
+        <div class="label">
+          <div data-i18n="setting_currency">Курсы валют</div>
+          <div class="desc" data-i18n="setting_currency_desc">Сохраняются с каждым доходом отдельно</div>
+        </div>
+        <span style="color:var(--text-light);font-size:12px;" data-i18n="setting_currency_note">Курс задаётся при добавлении дохода</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="cats_title">Категории</h2>
+      <p style="color:var(--text-light);font-size:13px;margin-bottom:14px;" data-i18n="cats_desc">Переименуйте категории под свои нужды или добавьте новые. Дефолтные удалить нельзя — только переименовать. Свои можно удалить, если на них нет ссылок в расходах.</p>
+      <div id="cats-list" class="items-list"></div>
+      <div class="add-zone" style="margin-top:12px;">
+        <input type="text" id="new-cat-name" data-i18n-placeholder="cats_new_ph" style="flex:1;">
+        <button class="btn btn-primary" id="btn-add-cat">+ <span data-i18n="cats_add">Добавить</span></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="settings_data">Данные</h2>
+      <p style="color:var(--text-light);font-size:13px;margin-bottom:14px;" data-i18n="data_desc">Все данные хранятся в браузере. Используйте экспорт, чтобы перенести на телефон или поделиться с Настей.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="btn-export">⬇ <span data-i18n="export_json">Экспорт JSON</span></button>
+        <button class="btn btn-mint" id="btn-import">⬆ <span data-i18n="import_json">Импорт JSON</span></button>
+        <input type="file" id="file-import" accept="application/json" style="display:none;">
+        <button class="btn btn-ghost" id="btn-seed" data-i18n="reseed">Загрузить пример</button>
+        <button class="btn btn-warning" id="btn-restore" data-i18n="restore_all">↺ Восстановить</button>
+        <button class="btn btn-danger" id="btn-reset" data-i18n="reset_all">Сбросить всё</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="about">О приложении</h2>
+      <p style="font-size:13px;line-height:1.6;color:var(--text-light);">
+        <span data-i18n="about_text">Свадебный планер бюджета. Работает офлайн, данные не покидают ваше устройство. Для синхронизации между устройствами — используйте экспорт/импорт JSON.</span>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h3 id="modal-title"></h3>
+    <p id="modal-text"></p>
+    <div class="actions">
+      <button class="btn btn-ghost" id="modal-cancel" data-i18n="cancel">Отмена</button>
+      <button class="btn btn-primary" id="modal-ok" data-i18n="confirm">Подтвердить</button>
+    </div>
   </div>
 </div>
 
-<div id="main-content"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-  const PASSWORD = "awx2kdh8QWD6rjk!whg";
-  
-  function unlockContent() {
-    document.getElementById('password-screen').classList.add('hidden');
-    document.getElementById('main-content').classList.add('visible');
+/* =========================================================
+   I18N
+========================================================= */
+const I18N = {
+  ru: {
+    title: "Misha & Nastya · Big Day & Beyond",
+    days_left: "Дней до свадьбы",
+    wedding_date: "Дата свадьбы",
+    tab_dashboard: "Дашборд",
+    tab_expenses: "Расходы",
+    tab_income: "Доходы",
+    tab_charts: "Графики",
+    tab_guests: "Гости",
+    tab_settings: "Настройки",
+    guest_confirmed: "✓ Точно будут",
+    guest_maybe: "? Под вопросом",
+    guest_name: "Имя",
+    guests_total: "Всего",
+    carpooling: "Карпулинг",
+    driver_name: "Имя водителя",
+    car_model: "Модель авто",
+    seats: "Мест",
+    add_car: "+ Авто",
+    add_passenger: "+ Добавить гостя",
+    no_cars: "Пока нет машин. Добавьте первую!",
+    all_guests_assigned: "Все гости уже распределены!",
+    choose_guest: "Выберите гостя:",
+    add_link: "Добавить ссылку:",
+    edit_link: "Редактировать ссылку:",
+    fill_date_source_amount: "Заполните дату, источник и сумму",
+    fill_date_amount: "Заполните дату и сумму",
+    rate_placeholder: "курс",
+    rate_to_uah_placeholder: "курс → UAH",
+    color_done: "Выполнено",
+    color_progress: "В процессе",
+    color_search: "Поиск",
+    link_title: "Добавить ссылку",
+    theme_peach: "Персик",
+    theme_mint: "Мятный",
+    theme_coral: "Коралл",
+    seating_title: "🪑 Рассадка",
+    seating_table_name_ph: "Название стола",
+    seating_seats_ph: "Мест",
+    seating_add_table: "+ Стол",
+    seating_no_tables: "Столов пока нет. Добавьте первый!",
+    seating_unassigned: "Не рассажены",
+    seating_add_guest: "+ Добавить гостя",
+    seating_all_seated: "Все гости рассажены",
+    seating_choose: "Выберите гостя:",
+    seating_seats_label: "мест",
+    budget_total: "Бюджет",
+    goal: "цель",
+    paid: "Оплачено",
+    advance: "Авансы",
+    reserved: "зарезервировано",
+    left_to_pay: "Осталось доплатить",
+    budget_progress: "Прогресс по бюджету",
+    planned: "Запланировано",
+    free: "Свободно",
+    income_total: "Накоплено",
+    balance: "Баланс",
+    income_minus_paid: "накоплено − оплачено",
+    need_more: "Нужно ещё",
+    to_full_budget: "до полного бюджета",
+    months_left: "Месяцев осталось",
+    upcoming_payments: "Ближайшие доплаты",
+    no_upcoming: "Нет запланированных доплат",
+    expenses_title: "Расходы и план",
+    search: "Поиск по названию...",
+    all_statuses: "Все статусы",
+    all_categories: "Все категории",
+    status_planned: "Запланировано",
+    status_chosen: "Выбрали подрядчика",
+    status_prepaid: "Внесён аванс",
+    status_paid: "Оплачено",
+    status_done: "Выполнено",
+    add_item: "Добавить",
+    income_title: "Доходы и накопления",
+    income_source_ph: "Источник (ЗП, бонус...)",
+    add_income: "Добавить",
+    chart_by_category: "Структура расходов по категориям",
+    chart_status: "По статусам оплаты",
+    chart_paid_vs_rest: "Оплачено vs к доплате",
+    chart_income_timeline: "Накопления во времени",
+    settings_general: "Общие настройки",
+    setting_budget: "Общий бюджет (UAH)",
+    setting_budget_desc: "Общая цель — сколько готовы потратить",
+    setting_date: "Дата свадьбы",
+    setting_date_desc: "Используется для отсчёта дней",
+    setting_currency: "Валюты",
+    setting_currency_desc: "Курс сохраняется с каждым доходом отдельно",
+    setting_currency_note: "Задаётся при добавлении дохода",
+    settings_data: "Данные",
+    data_desc: "Все данные хранятся в браузере. Используйте экспорт, чтобы перенести на телефон или поделиться с Настей.",
+    export_json: "Экспорт JSON",
+    import_json: "Импорт JSON",
+    reseed: "Загрузить пример",
+    reset_all: "Сбросить всё",
+    about: "О приложении",
+    about_text: "Свадебный планер бюджета. Работает офлайн, данные не покидают устройство. Для синхронизации — экспорт/импорт JSON.",
+    cancel: "Отмена",
+    confirm: "Подтвердить",
+    confirm_reset: "Удалить все данные?",
+    confirm_reset_text: "Это действие нельзя отменить. Лучше сначала экспортировать резервную копию.",
+    confirm_restore: "Восстановить последнее сохранение?",
+    confirm_restore_text: "Все текущие изменения будут потеряны и восстановлены данные из последней автоматической резервной копии.",
+    no_backup: "Резервная копия не найдена",
+    restore_all: "↺ Восстановить",
+    confirm_seed: "Загрузить пример?",
+    confirm_seed_text: "Текущие данные будут заменены примером (стандартные категории и цены).",
+    confirm_import: "Импортировать данные?",
+    confirm_import_text: "Текущие данные будут заменены содержимым файла.",
+    saved: "Сохранено",
+    imported: "Данные импортированы",
+    exported: "Файл экспортирован",
+    name: "Название",
+    category: "Категория",
+    estimated: "Ориентир",
+    actual: "Факт",
+    advance_short: "Аванс",
+    rest: "К доплате",
+    deadline: "Дедлайн",
+    status: "Статус",
+    note: "Заметка",
+    delete: "Удалить",
+    confirm_delete: "Удалить этот пункт?",
+    cat_venue: "Локация",
+    cat_coordinator: "Координатор",
+    cat_transport: "Транспорт",
+    cat_items: "Айтемс",
+    cat_catering: "Кейтеринг",
+    cat_mc_dj: "Ведущий / Диджей",
+    cat_decor: "Декор",
+    cat_outfits: "Одежда",
+    cat_rings: "Кольца",
+    cat_photo: "Фотограф",
+    cat_video: "Видеограф",
+    cat_invitations: "Приглашения",
+    cat_favors: "Бонбоньерки",
+    cat_bouquet: "Букет / Бутоньерка",
+    cat_cake: "Торт",
+    cat_alcohol: "Алкоголь / Вода",
+    cat_beauty: "Бьюти (макияж/причёска)",
+    cat_manicure: "Маникюр",
+    cat_party: "Девичник / Мальчишник",
+    cat_honeymoon: "Медовый месяц",
+    cat_gifts: "Подарки гостям",
+    cat_other: "Прочее",
+    seed_initial_paid: "50% предоплаты внесено",
+    no_items: "Список пуст. Добавьте первую позицию.",
+    no_incomes: "Доходов пока нет. Добавьте первое поступление.",
+    income_in_uah: "в гривнах",
+    days_until: "дн.",
+    add_income_btn: "Добавить",
+    monthly_need: "/мес чтобы накопить",
+    tab_cushion: "Подушка",
+    cushion_title: "Финансовая подушка",
+    cushion_goal: "Цель",
+    cushion_after_wedding: "после свадьбы",
+    cushion_saved: "Накоплено",
+    cushion_left: "Осталось",
+    cushion_deposits_count: "Пополнений",
+    cushion_progress: "Прогресс к цели",
+    cushion_settings: "Настройки цели",
+    cushion_goal_amount: "Сумма цели",
+    cushion_goal_desc: "Сколько хочется отложить как подушку безопасности",
+    cushion_rate: "Текущий курс UAH → валюта цели",
+    cushion_rate_desc: "Используется чтобы пересчитать вклады в гривнах в валюту цели",
+    cushion_deposits: "Пополнения",
+    cushion_note_ph: "Источник (зп, бонус, кешбэк...)",
+    cushion_add_dep: "Добавить",
+    cushion_no_deposits: "Пока нет пополнений. Добавьте первое.",
+    cushion_last: "последнее",
+    cushion_monthly: "/мес чтобы успеть",
+    chart_cushion_timeline: "Подушка во времени",
+    converted_to_goal: "в валюте цели",
+    cats_title: "Категории расходов",
+    cats_desc: "Переименуйте категории под свои нужды или добавьте новые. Дефолтные удалить нельзя — только переименовать. Свои можно удалить, если на них нет ссылок в расходах.",
+    cats_new_ph: "Название новой категории",
+    cats_add: "Добавить",
+    cats_default: "стандарт",
+    cats_custom: "своя",
+    cats_used: "позиций",
+    cats_save: "Сохранить",
+    cats_reset_name: "Вернуть исходное",
+    cats_in_use: "Нельзя удалить — категория используется в расходах",
+    tab_calendar: "Календарь",
+    cal_jump_wedding: "К свадьбе",
+    cal_jump_today: "Сегодня",
+    cal_legend_wedding: "Свадьба",
+    cal_legend_deadline: "Дедлайн оплаты",
+    cal_legend_income: "Доход",
+    cal_legend_cushion: "Подушка",
+    cal_no_events: "На эту дату событий нет",
+    cal_event_wedding: "Большой день",
+    cal_event_deadline: "Дедлайн",
+    cal_event_income: "Доход",
+    cal_event_cushion: "Подушка",
+    cal_due_label: "к доплате",
+    months_full: ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],
+    days_short: ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"],
+  },
+  ua: {
+    title: "Misha & Nastya · Big Day & Beyond",
+    days_left: "Днів до весілля",
+    wedding_date: "Дата весілля",
+    tab_dashboard: "Дашборд",
+    tab_expenses: "Витрати",
+    tab_income: "Доходи",
+    tab_charts: "Графіки",
+    tab_guests: "Гості",
+    tab_settings: "Налаштування",
+    guest_confirmed: "✓ Точно будуть",
+    guest_maybe: "? Під питанням",
+    guest_name: "Ім'я",
+    guests_total: "Всього",
+    carpooling: "Спільні поїздки",
+    driver_name: "Ім'я водія",
+    car_model: "Модель авто",
+    seats: "Місць",
+    add_car: "+ Авто",
+    add_passenger: "+ Додати гостя",
+    no_cars: "Поки немає машин. Додайте першу!",
+    all_guests_assigned: "Усі гості вже розподілені!",
+    choose_guest: "Оберіть гостя:",
+    add_link: "Додати посилання:",
+    edit_link: "Редагувати посилання:",
+    fill_date_source_amount: "Заповніть дату, джерело та суму",
+    fill_date_amount: "Заповніть дату та суму",
+    rate_placeholder: "курс",
+    rate_to_uah_placeholder: "курс → UAH",
+    color_done: "Виконано",
+    color_progress: "В процесі",
+    color_search: "Пошук",
+    link_title: "Додати посилання",
+    theme_peach: "Персик",
+    theme_mint: "М'ятний",
+    theme_coral: "Корал",
+    seating_title: "🪑 Розсадка",
+    seating_table_name_ph: "Назва столу",
+    seating_seats_ph: "Місць",
+    seating_add_table: "+ Стіл",
+    seating_no_tables: "Столів поки немає. Додайте перший!",
+    seating_unassigned: "Не розсаджені",
+    seating_add_guest: "+ Додати гостя",
+    seating_all_seated: "Усі гості розсаджені",
+    seating_choose: "Оберіть гостя:",
+    seating_seats_label: "місць",
+    no_cars: "Поки немає машин. Додайте першу!",
+    budget_total: "Бюджет",
+    goal: "ціль",
+    paid: "Оплачено",
+    advance: "Аванси",
+    reserved: "зарезервовано",
+    left_to_pay: "Залишилось доплатити",
+    budget_progress: "Прогрес бюджету",
+    planned: "Заплановано",
+    free: "Вільно",
+    income_total: "Накопичено",
+    balance: "Баланс",
+    income_minus_paid: "накопичено − оплачено",
+    need_more: "Потрібно ще",
+    to_full_budget: "до повного бюджету",
+    months_left: "Місяців залишилось",
+    upcoming_payments: "Найближчі доплати",
+    no_upcoming: "Немає запланованих доплат",
+    expenses_title: "Витрати і план",
+    search: "Пошук за назвою...",
+    all_statuses: "Всі статуси",
+    all_categories: "Всі категорії",
+    status_planned: "Заплановано",
+    status_chosen: "Обрали підрядника",
+    status_prepaid: "Внесено аванс",
+    status_paid: "Оплачено",
+    status_done: "Виконано",
+    add_item: "Додати",
+    income_title: "Доходи і накопичення",
+    income_source_ph: "Джерело (ЗП, бонус...)",
+    add_income: "Додати",
+    chart_by_category: "Структура витрат за категоріями",
+    chart_status: "За статусами оплати",
+    chart_paid_vs_rest: "Оплачено vs до доплати",
+    chart_income_timeline: "Накопичення у часі",
+    settings_general: "Загальні налаштування",
+    setting_budget: "Загальний бюджет (UAH)",
+    setting_budget_desc: "Загальна ціль — скільки готові витратити",
+    setting_date: "Дата весілля",
+    setting_date_desc: "Використовується для відліку днів",
+    setting_currency: "Валюти",
+    setting_currency_desc: "Курс зберігається з кожним доходом окремо",
+    setting_currency_note: "Задається при додаванні доходу",
+    settings_data: "Дані",
+    data_desc: "Усі дані зберігаються в браузері. Використовуйте експорт, щоб перенести на телефон або поділитися з Настею.",
+    export_json: "Експорт JSON",
+    import_json: "Імпорт JSON",
+    reseed: "Завантажити приклад",
+    reset_all: "Скинути все",
+    about: "Про застосунок",
+    about_text: "Весільний планер бюджету. Працює офлайн, дані не покидають пристрій. Для синхронізації — експорт/імпорт JSON.",
+    cancel: "Скасувати",
+    confirm: "Підтвердити",
+    confirm_reset: "Видалити всі дані?",
+    confirm_reset_text: "Цю дію не можна скасувати. Краще спочатку експортувати резервну копію.",
+    confirm_restore: "Відновити останнє збереження?",
+    confirm_restore_text: "Усі поточні зміни будуть втрачені і відновлені дані з останньої автоматичної резервної копії.",
+    no_backup: "Резервна копія не знайдена",
+    restore_all: "↺ Відновити",
+    confirm_seed: "Завантажити приклад?",
+    confirm_seed_text: "Поточні дані будуть замінені прикладом (стандартні категорії та ціни).",
+    confirm_import: "Імпортувати дані?",
+    confirm_import_text: "Поточні дані будуть замінені вмістом файла.",
+    saved: "Збережено",
+    imported: "Дані імпортовано",
+    exported: "Файл експортовано",
+    name: "Назва",
+    category: "Категорія",
+    estimated: "Орієнтир",
+    actual: "Факт",
+    advance_short: "Аванс",
+    rest: "До доплати",
+    deadline: "Дедлайн",
+    status: "Статус",
+    note: "Нотатка",
+    delete: "Видалити",
+    confirm_delete: "Видалити цей пункт?",
+    cat_venue: "Локація",
+    cat_coordinator: "Координатор",
+    cat_transport: "Транспорт",
+    cat_items: "Айтемс",
+    cat_catering: "Кейтеринг",
+    cat_mc_dj: "Ведучий / Діджей",
+    cat_decor: "Декор",
+    cat_outfits: "Одяг",
+    cat_rings: "Каблучки",
+    cat_photo: "Фотограф",
+    cat_video: "Відеограф",
+    cat_invitations: "Запрошення",
+    cat_favors: "Бонбоньєрки",
+    cat_bouquet: "Букет / Бутоньєрка",
+    cat_cake: "Торт",
+    cat_alcohol: "Алкоголь / Вода",
+    cat_beauty: "Б'юті (макіяж/зачіска)",
+    cat_manicure: "Манікюр",
+    cat_party: "Дівич-вечір / Парубоцька",
+    cat_honeymoon: "Медовий місяць",
+    cat_gifts: "Подарунки гостям",
+    cat_other: "Інше",
+    seed_initial_paid: "50% передоплати внесено",
+    no_items: "Список порожній. Додайте першу позицію.",
+    no_incomes: "Доходів поки немає. Додайте перше надходження.",
+    income_in_uah: "у гривнях",
+    days_until: "дн.",
+    monthly_need: "/міс щоб накопичити",
+    tab_cushion: "Подушка",
+    cushion_title: "Фінансова подушка",
+    cushion_goal: "Ціль",
+    cushion_after_wedding: "після весілля",
+    cushion_saved: "Накопичено",
+    cushion_left: "Залишилось",
+    cushion_deposits_count: "Поповнень",
+    cushion_progress: "Прогрес до цілі",
+    cushion_settings: "Налаштування цілі",
+    cushion_goal_amount: "Сума цілі",
+    cushion_goal_desc: "Скільки хочеться відкласти як подушку безпеки",
+    cushion_rate: "Поточний курс UAH → валюта цілі",
+    cushion_rate_desc: "Використовується щоб перерахувати внески в гривнях у валюту цілі",
+    cushion_deposits: "Поповнення",
+    cushion_note_ph: "Джерело (ЗП, бонус, кешбек...)",
+    cushion_add_dep: "Додати",
+    cushion_no_deposits: "Поки немає поповнень. Додайте перше.",
+    cushion_last: "останнє",
+    cushion_monthly: "/міс щоб встигнути",
+    chart_cushion_timeline: "Подушка у часі",
+    converted_to_goal: "у валюті цілі",
+    cats_title: "Категорії витрат",
+    cats_desc: "Перейменуйте категорії під свої потреби або додайте нові. Стандартні видалити не можна — тільки перейменувати. Свої можна видалити, якщо на них немає посилань у витратах.",
+    cats_new_ph: "Назва нової категорії",
+    cats_add: "Додати",
+    cats_default: "стандарт",
+    cats_custom: "своя",
+    cats_used: "позицій",
+    cats_save: "Зберегти",
+    cats_reset_name: "Повернути початкову",
+    cats_in_use: "Не можна видалити — категорія використовується у витратах",
+    tab_calendar: "Календар",
+    cal_jump_wedding: "До весілля",
+    cal_jump_today: "Сьогодні",
+    cal_legend_wedding: "Весілля",
+    cal_legend_deadline: "Крайній термін оплати",
+    cal_legend_income: "Дохід",
+    cal_legend_cushion: "Подушка",
+    cal_no_events: "На цю дату подій немає",
+    cal_event_wedding: "Великий день",
+    cal_event_deadline: "Крайній термін",
+    cal_event_income: "Дохід",
+    cal_event_cushion: "Подушка",
+    cal_due_label: "до доплати",
+    months_full: ["Січень","Лютий","Березень","Квітень","Травень","Червень","Липень","Серпень","Вересень","Жовтень","Листопад","Грудень"],
+    days_short: ["Пн","Вт","Ср","Чт","Пт","Сб","Нд"],
+  },
+  en: {
+    title: "Misha & Nastya · Big Day & Beyond",
+    days_left: "Days till wedding",
+    wedding_date: "Wedding date",
+    tab_dashboard: "Dashboard",
+    tab_expenses: "Expenses",
+    tab_income: "Income",
+    tab_charts: "Charts",
+    tab_guests: "Guests",
+    tab_settings: "Settings",
+    guest_confirmed: "✓ Confirmed",
+    guest_maybe: "? Maybe",
+    guest_name: "Name",
+    guests_total: "Total",
+    carpooling: "Carpooling",
+    driver_name: "Driver name",
+    car_model: "Car model",
+    seats: "Seats",
+    add_car: "+ Car",
+    add_passenger: "+ Add guest",
+    no_cars: "No cars yet. Add one!",
+    all_guests_assigned: "All guests are already assigned!",
+    choose_guest: "Choose a guest:",
+    add_link: "Add link:",
+    edit_link: "Edit link:",
+    fill_date_source_amount: "Fill in date, source and amount",
+    fill_date_amount: "Fill in date and amount",
+    rate_placeholder: "rate",
+    rate_to_uah_placeholder: "rate → UAH",
+    color_done: "Done",
+    color_progress: "In progress",
+    color_search: "Searching",
+    link_title: "Add link",
+    theme_peach: "Peach",
+    theme_mint: "Mint",
+    theme_coral: "Coral",
+    seating_title: "🪑 Seating plan",
+    seating_table_name_ph: "Table name",
+    seating_seats_ph: "Seats",
+    seating_add_table: "+ Table",
+    seating_no_tables: "No tables yet. Add one!",
+    seating_unassigned: "Unassigned",
+    seating_add_guest: "+ Add guest",
+    seating_all_seated: "All guests are seated",
+    seating_choose: "Choose a guest:",
+    seating_seats_label: "seats",
+    budget_total: "Budget",
+    goal: "goal",
+    paid: "Paid",
+    advance: "Deposits",
+    reserved: "reserved",
+    left_to_pay: "Left to pay",
+    budget_progress: "Budget progress",
+    planned: "Planned",
+    free: "Free",
+    income_total: "Saved",
+    balance: "Balance",
+    saved: "Saved",
+    income_minus_paid: "saved − paid",
+    need_more: "Need more",
+    to_full_budget: "to full budget",
+    months_left: "Months left",
+    upcoming_payments: "Upcoming payments",
+    no_upcoming: "No scheduled payments",
+    expenses_title: "Expenses & plan",
+    search: "Search by name...",
+    all_statuses: "All statuses",
+    all_categories: "All categories",
+    status_planned: "Planned",
+    status_chosen: "Vendor chosen",
+    status_prepaid: "Deposit paid",
+    status_paid: "Fully paid",
+    status_done: "Done",
+    add_item: "Add",
+    income_title: "Income & savings",
+    income_source_ph: "Source (salary, bonus...)",
+    add_income: "Add",
+    chart_by_category: "Expenses by category",
+    chart_status: "By payment status",
+    chart_paid_vs_rest: "Paid vs remaining",
+    chart_income_timeline: "Savings over time",
+    settings_general: "General settings",
+    setting_budget: "Total budget (UAH)",
+    setting_budget_desc: "Goal — how much you're ready to spend",
+    setting_date: "Wedding date",
+    setting_date_desc: "Used for the countdown",
+    setting_currency: "Currencies",
+    setting_currency_desc: "Rate stored per income entry",
+    setting_currency_note: "Set when adding income",
+    settings_data: "Data",
+    data_desc: "All data is stored in your browser. Use export to share with Nastya or move to your phone.",
+    export_json: "Export JSON",
+    import_json: "Import JSON",
+    reseed: "Load example",
+    reset_all: "Reset all",
+    about: "About",
+    about_text: "Wedding budget planner. Offline-first, data never leaves your device. Use JSON export/import to sync.",
+    cancel: "Cancel",
+    confirm: "Confirm",
+    confirm_reset: "Delete all data?",
+    confirm_reset_text: "This cannot be undone. Better export a backup first.",
+    confirm_restore: "Restore last save?",
+    confirm_restore_text: "All current changes will be lost and data from the last automatic backup will be restored.",
+    no_backup: "Backup not found",
+    restore_all: "↺ Restore",
+    confirm_seed: "Load example?",
+    confirm_seed_text: "Current data will be replaced with the example seed.",
+    confirm_import: "Import data?",
+    confirm_import_text: "Current data will be replaced with file contents.",
+    saved: "Saved",
+    imported: "Data imported",
+    exported: "File exported",
+    name: "Name",
+    category: "Category",
+    estimated: "Estimate",
+    actual: "Actual",
+    advance_short: "Deposit",
+    rest: "Remaining",
+    deadline: "Deadline",
+    status: "Status",
+    note: "Note",
+    delete: "Delete",
+    confirm_delete: "Delete this item?",
+    cat_venue: "Venue",
+    cat_coordinator: "Coordinator",
+    cat_transport: "Transport",
+    cat_items: "Items",
+    cat_catering: "Catering",
+    cat_mc_dj: "MC / DJ",
+    cat_decor: "Decor",
+    cat_outfits: "Outfits",
+    cat_rings: "Rings",
+    cat_photo: "Photographer",
+    cat_video: "Videographer",
+    cat_invitations: "Invitations",
+    cat_favors: "Favors",
+    cat_bouquet: "Bouquet / Boutonniere",
+    cat_cake: "Cake",
+    cat_alcohol: "Alcohol / Water",
+    cat_beauty: "Beauty (makeup/hair)",
+    cat_manicure: "Manicure",
+    cat_party: "Hen / Stag party",
+    cat_honeymoon: "Honeymoon",
+    cat_gifts: "Gifts for guests",
+    cat_other: "Other",
+    seed_initial_paid: "50% deposit paid",
+    no_items: "Empty list. Add your first item.",
+    no_incomes: "No income yet. Add your first entry.",
+    income_in_uah: "in UAH",
+    days_until: "d",
+    monthly_need: "/mo to save",
+    tab_cushion: "Safety net",
+    cushion_title: "Safety net fund",
+    cushion_goal: "Goal",
+    cushion_after_wedding: "after wedding",
+    cushion_saved: "Saved",
+    cushion_left: "Left",
+    cushion_deposits_count: "Deposits",
+    cushion_progress: "Progress to goal",
+    cushion_settings: "Goal settings",
+    cushion_goal_amount: "Goal amount",
+    cushion_goal_desc: "How much you want as a safety net",
+    cushion_rate: "Current UAH → goal currency rate",
+    cushion_rate_desc: "Used to convert UAH deposits into the goal currency",
+    cushion_deposits: "Deposits",
+    cushion_note_ph: "Source (salary, bonus, cashback...)",
+    cushion_add_dep: "Add",
+    cushion_no_deposits: "No deposits yet. Add your first one.",
+    cushion_last: "last",
+    cushion_monthly: "/mo to make it",
+    chart_cushion_timeline: "Safety net over time",
+    converted_to_goal: "in goal currency",
+    cats_title: "Expense categories",
+    cats_desc: "Rename default categories or add your own. Defaults can't be deleted — only renamed. Custom ones can be deleted if no expense references them.",
+    cats_new_ph: "New category name",
+    cats_add: "Add",
+    cats_default: "default",
+    cats_custom: "custom",
+    cats_used: "items",
+    cats_save: "Save",
+    cats_reset_name: "Reset to default",
+    cats_in_use: "Can't delete — category is used in expenses",
+    tab_calendar: "Calendar",
+    cal_jump_wedding: "Jump to wedding",
+    cal_jump_today: "Today",
+    cal_legend_wedding: "Wedding",
+    cal_legend_deadline: "Payment deadline",
+    cal_legend_income: "Income",
+    cal_legend_cushion: "Safety net",
+    cal_no_events: "No events on this date",
+    cal_event_wedding: "The big day",
+    cal_event_deadline: "Deadline",
+    cal_event_income: "Income",
+    cal_event_cushion: "Safety net",
+    cal_due_label: "to pay",
+    months_full: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+    days_short: ["Mo","Tu","We","Th","Fr","Sa","Su"],
+  },
+};
+
+const DEFAULT_CATEGORY_KEYS = [
+  "cat_venue","cat_coordinator","cat_transport","cat_items","cat_catering",
+  "cat_mc_dj","cat_decor","cat_outfits","cat_rings","cat_photo","cat_video",
+  "cat_invitations","cat_favors","cat_bouquet","cat_cake","cat_alcohol",
+  "cat_beauty","cat_manicure","cat_party","cat_honeymoon","cat_gifts","cat_other"
+];
+
+function ensureCategories() {
+  if (!Array.isArray(state.categories) || state.categories.length === 0) {
+    state.categories = DEFAULT_CATEGORY_KEYS.map(k => ({ key: k, customName: null }));
+  } else {
+    // backwards compat: ensure all default keys present
+    const have = new Set(state.categories.map(c => c.key));
+    DEFAULT_CATEGORY_KEYS.forEach(k => {
+      if (!have.has(k)) state.categories.push({ key: k, customName: null });
+    });
   }
-  
-  function checkPassword() {
-    const saved = localStorage.getItem('wedding_auth');
-    if (saved === PASSWORD) {
-      unlockContent();
-    }
+  if (!state.nextCategoryId) {
+    const maxN = state.categories
+      .map(c => (c.key && c.key.startsWith("custom_")) ? +c.key.slice(7) : 0)
+      .reduce((m, x) => Math.max(m, x), 0);
+    state.nextCategoryId = maxN + 1;
   }
+}
+
+function getCatName(key) {
+  ensureCategories();
+  const c = state.categories.find(x => x.key === key);
+  if (c && c.customName) return c.customName;
+  return t(key);
+}
+
+function categoryKeys() {
+  ensureCategories();
+  return state.categories.map(c => c.key);
+}
+
+/* =========================================================
+   STATE
+========================================================= */
+const STORAGE_KEY = "wedding_budget_v1";
+
+const DEFAULT_SEED = {
+  weddingDate: "2026-09-18",
+  totalBudget: 500000,
+  language: "ru",
+  headerColor: "peach",
+  items: [
+    { id: 1,  name: "Локация / Venue",            category: "cat_venue",       estimated: 100000, actual: 100000, advance: 50000, deadline: "2026-09-15", status: "prepaid", notes: "50% предоплата внесена" },
+    { id: 2,  name: "Координатор",                category: "cat_coordinator", estimated: 17600,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 3,  name: "Транспорт",                  category: "cat_transport",   estimated: 13000,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 4,  name: "Айтемс (мелкие реквизиты)",  category: "cat_items",       estimated: 10000,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 5,  name: "Кейтеринг",                  category: "cat_catering",    estimated: 100000, actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "Минус 20к +- (можно сэкономить)" },
+    { id: 6,  name: "Ведущий / Диджей",           category: "cat_mc_dj",       estimated: 70400,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "Минус 25к +- (можно сэкономить)" },
+    { id: 7,  name: "Декор",                      category: "cat_decor",       estimated: 10000,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 8,  name: "Одежда (платье/костюм)",     category: "cat_outfits",     estimated: 20000,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 9,  name: "Обручальные кольца",          category: "cat_rings",       estimated: 50000,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 10, name: "Фотограф",                   category: "cat_photo",       estimated: 35200,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 11, name: "Видеограф",                  category: "cat_video",       estimated: 35200,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 12, name: "Приглашения",                category: "cat_invitations", estimated: 2500,   actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 13, name: "Бонбоньерки",                category: "cat_favors",      estimated: 2500,   actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 14, name: "Букет / Бутоньерка",         category: "cat_bouquet",     estimated: 3000,   actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 15, name: "Торт",                       category: "cat_cake",        estimated: 6000,   actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 16, name: "Алкоголь / Вода",            category: "cat_alcohol",     estimated: 20000,  actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 17, name: "Бьюти (макияж/причёска)",    category: "cat_beauty",      estimated: 4000,   actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+    { id: 18, name: "Маникюр",                    category: "cat_manicure",    estimated: 1500,   actual: 0,      advance: 0,     deadline: "",            status: "planned", notes: "" },
+  ],
+  incomes: [
+    { id: 1, date: "2026-05-01", source: "Отложенные (сбережения)", amount: 6000,  currency: "USD", rate: 42, notes: "Уже накоплено" },
+    { id: 2, date: "2026-05-08", source: "Бонус (май)",             amount: 4880,  currency: "USD", rate: 42, notes: "" },
+  ],
+  cushion: {
+    goalAmount: 10000,
+    goalCurrency: "USD",
+    rateToUah: 42,
+    deposits: [],
+    nextDepositId: 1,
+  },
+  nextItemId: 19,
+  nextIncomeId: 3,
+};
+
+let state = loadState();
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) { console.error(e); }
+  return JSON.parse(JSON.stringify(DEFAULT_SEED));
+}
+
+let saveTimeout;
+
+function formatTime(date) {
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${hours}:${minutes}`;
+}
+
+function showSaveIndicator() {
+  const indicator = document.getElementById("save-indicator");
+  const saveTime = document.getElementById("save-time");
+  if (!indicator) return;
   
-  document.getElementById('password-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const password = document.getElementById('password-input').value;
-    
-    if (password === PASSWORD) {
-      localStorage.setItem('wedding_auth', PASSWORD);
-      setTimeout(() => unlockContent(), 300);
+  indicator.classList.add("saving");
+  const now = new Date();
+  if (saveTime) {
+    saveTime.textContent = formatTime(now);
+  }
+  clearTimeout(saveTimeout);
+  
+  saveTimeout = setTimeout(() => {
+    indicator.classList.remove("saving");
+  }, 800);
+}
+
+function saveState() {
+  try { 
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    // Автоматически сохраняем бэкап перед каждым сохранением
+    localStorage.setItem('BACKUP_' + STORAGE_KEY, JSON.stringify(state));
+    showSaveIndicator();
+  }
+  catch (e) { console.error(e); }
+}
+
+/* =========================================================
+   I18N HELPERS
+========================================================= */
+function t(key) {
+  return (I18N[state.language] && I18N[state.language][key]) || I18N.ru[key] || key;
+}
+function applyI18n() {
+  document.documentElement.lang = state.language;
+  document.title = t("title");
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = t(el.getAttribute("data-i18n"));
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    el.placeholder = t(el.getAttribute("data-i18n-placeholder"));
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach(el => {
+    el.title = t(el.getAttribute("data-i18n-title"));
+  });
+  // language buttons
+  document.querySelectorAll(".lang-switch button").forEach(b => {
+    b.classList.toggle("active", b.dataset.lang === state.language);
+  });
+  populateCategoryFilter();
+  render();
+}
+
+/* =========================================================
+   FORMATTERS
+========================================================= */
+function fmt(n) {
+  if (typeof n !== "number" || isNaN(n)) n = 0;
+  return new Intl.NumberFormat("uk-UA", { maximumFractionDigits: 0 }).format(Math.round(n)) + " ₴";
+}
+function fmtRaw(n) {
+  if (typeof n !== "number" || isNaN(n)) n = 0;
+  return new Intl.NumberFormat("uk-UA", { maximumFractionDigits: 0 }).format(Math.round(n));
+}
+function currencySymbol(c) {
+  return c === "USD" ? "$" : c === "EUR" ? "€" : "₴";
+}
+function fmtCur(n, currency) {
+  if (typeof n !== "number" || isNaN(n)) n = 0;
+  const decimals = currency === "UAH" ? 0 : 2;
+  const formatted = new Intl.NumberFormat("uk-UA", { maximumFractionDigits: decimals, minimumFractionDigits: 0 }).format(n);
+  const sym = currencySymbol(currency);
+  return currency === "UAH" ? formatted + " " + sym : sym + formatted;
+}
+function dateOnly(d) {
+  if (!d) return "";
+  const dt = new Date(d);
+  return dt.toLocaleDateString(state.language === "en" ? "en-GB" : (state.language === "ua" ? "uk-UA" : "ru-RU"));
+}
+
+/* =========================================================
+   COMPUTATIONS
+========================================================= */
+function computeTotals() {
+  // Decoupled from status: any "advance > 0" counts as money already paid.
+  // paidFull = items fully paid (status paid/done); advances = sum of partial deposits across all other items.
+  // totalSpent = paidFull + advances ("real money out of pocket").
+  // leftToPay  = actual - totalSpent ("what's still owed to vendors").
+  // notStarted = items still in 'planned' status (nothing chosen, nothing paid) — for awareness.
+  let estimated = 0, actual = 0, paidFull = 0, advances = 0, notStarted = 0;
+  state.items.forEach(it => {
+    estimated += +it.estimated || 0;
+    const aPrice = (+it.actual || 0) > 0 ? (+it.actual) : (+it.estimated || 0);
+    actual += aPrice;
+    const adv = Math.max(0, +it.advance || 0);
+    if (it.status === "paid" || it.status === "done") {
+      paidFull += aPrice;
     } else {
-      document.getElementById('error-msg').classList.add('show');
-      document.getElementById('password-input').value = '';
-      document.getElementById('password-input').focus();
+      const cappedAdv = Math.min(adv, aPrice);
+      advances += cappedAdv;
+      if (it.status === "planned" && cappedAdv === 0) {
+        notStarted += aPrice;
+      }
     }
   });
+  const totalSpent = paidFull + advances;
+  const leftToPay = Math.max(0, actual - totalSpent);
+  let income = 0;
+  state.incomes.forEach(inc => {
+    const r = +inc.rate || 1;
+    if ((inc.currency || "UAH") === "UAH") income += +inc.amount || 0;
+    else income += (+inc.amount || 0) * r;
+  });
+  return {
+    estimated, actual,
+    paidFull, advances, totalSpent, leftToPay, notStarted,
+    // backwards-compat aliases for older render code:
+    paid: totalSpent,
+    advance: advances,
+    planned: leftToPay,
+    income,
+    budget: +state.totalBudget || 0,
+  };
+}
+
+function daysUntilWedding() {
+  if (!state.weddingDate) return null;
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const w = new Date(state.weddingDate);
+  return Math.round((w - today) / (1000 * 60 * 60 * 24));
+}
+
+function monthsUntilWedding() {
+  if (!state.weddingDate) return null;
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const w = new Date(state.weddingDate);
+  const days = Math.max(0, Math.round((w - today) / (1000 * 60 * 60 * 24)));
+  return Math.ceil(days / 30.44);
+}
+
+/* =========================================================
+   RENDER: DASHBOARD
+========================================================= */
+function renderDashboard() {
+  const tot = computeTotals();
+  const days = daysUntilWedding();
+  const months = monthsUntilWedding();
+
+  document.getElementById("days-left").textContent = days === null ? "—" : days;
+  document.getElementById("wedding-date-display").textContent = state.weddingDate ? dateOnly(state.weddingDate) : "—";
+
+  document.getElementById("stat-budget").textContent = fmt(tot.budget);
+  // "Оплачено" = всё, что уже отдано: полностью оплаченные + авансы по любым статусам
+  document.getElementById("stat-paid").textContent = fmt(tot.totalSpent);
+  const pct = tot.budget ? Math.round((tot.totalSpent / tot.budget) * 100) : 0;
+  document.getElementById("stat-paid-pct").textContent = pct + "% " + t("budget_total").toLowerCase();
+  // "Авансы" = именно сумма внесённых авансов (часть от "Оплачено")
+  document.getElementById("stat-advance").textContent = fmt(tot.advances);
+  // "Осталось доплатить" = actual - totalSpent
+  document.getElementById("stat-rest").textContent = fmt(tot.leftToPay);
+  document.getElementById("stat-rest-sub").textContent = fmtRaw(tot.actual) + " ₴ " + (state.language === "en" ? "total" : (state.language === "ua" ? "усього" : "всего"));
+
+  // progress bar
+  const budget = Math.max(tot.budget, tot.actual);
+  // Mint = paid in full; Cream = advances; Pink = remaining to pay; Sand bg = free budget
+  const wp = budget ? (tot.paidFull / budget) * 100 : 0;
+  const wa = budget ? (tot.advances / budget) * 100 : 0;
+  const wpl = budget ? (tot.leftToPay / budget) * 100 : 0;
+  document.getElementById("bar-paid").style.width = wp + "%";
+  document.getElementById("bar-advance").style.width = wa + "%";
+  document.getElementById("bar-planned").style.width = wpl + "%";
+
+  // savings stats
+  document.getElementById("stat-income").textContent = fmt(tot.income);
+  const savedPct = tot.budget ? Math.round((tot.income / tot.budget) * 100) : 0;
+  document.getElementById("stat-income-sub").textContent = savedPct + "% " + t("budget_total").toLowerCase();
+  document.getElementById("stat-balance").textContent = fmt(tot.income - tot.totalSpent);
+  const need = Math.max(0, tot.budget - tot.income);
+  document.getElementById("stat-need").textContent = fmt(need);
+
+  // upcoming payments
+  const upcoming = state.items
+    .filter(it => it.status !== "paid" && it.status !== "done" && it.deadline)
+    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
+    .slice(0, 5);
+  const cont = document.getElementById("upcoming-payments");
+  if (upcoming.length === 0) {
+    cont.innerHTML = '<div class="empty">' + t("no_upcoming") + "</div>";
+  } else {
+    cont.innerHTML = upcoming.map(it => {
+      const aPrice = (+it.actual || 0) > 0 ? (+it.actual) : (+it.estimated || 0);
+      const due = Math.max(0, aPrice - (+it.advance || 0));
+      const d = new Date(it.deadline);
+      const daysOff = Math.round((d - new Date()) / (1000*60*60*24));
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+        <div>
+          <div style="font-weight:600;">${escapeHtml(it.name)}</div>
+          <div style="font-size:12px;color:var(--text-light);">${dateOnly(it.deadline)} · ${daysOff > 0 ? daysOff + " " + t("days_until") : "today/просрочено"}</div>
+        </div>
+        <div style="font-weight:700;color:var(--pink-deep);">${fmt(due)}</div>
+      </div>`;
+    }).join("");
+  }
+}
+
+/* =========================================================
+   RENDER: EXPENSES
+========================================================= */
+function escapeHtml(s) {
+  return String(s || "").replace(/[&<>"']/g, c => ({
+    "&":"•","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function renderExpenses() {
+  const list = document.getElementById("items-list");
+  const search = (document.getElementById("search-items").value || "").toLowerCase();
+  const fStatus = document.getElementById("filter-status").value;
+  const fCat = document.getElementById("filter-category").value;
+  const filtered = state.items.filter(it => {
+    if (search && !it.name.toLowerCase().includes(search)) return false;
+    if (fStatus && it.status !== fStatus) return false;
+    if (fCat && it.category !== fCat) return false;
+    return true;
+  });
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty">' + t("no_items") + "</div>";
+    return;
+  }
+  list.innerHTML = filtered.map(it => {
+    const aPrice = (+it.actual || 0) > 0 ? (+it.actual) : (+it.estimated || 0);
+    const due = Math.max(0, aPrice - (+it.advance || 0));
+    return `<div class="item-row color-${it.itemColor || 'search'}" data-id="${it.id}" data-item-color="${it.itemColor || 'search'}">
+      <div class="color-indicator">
+        <button class="link-btn" data-action="link" title="${t('link_title')}" ${it.itemLink ? "style='opacity:1;color:var(--primary)'" : ""}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>
+        <button class="color-btn done ${(it.itemColor || 'search') === 'done' ? 'active' : ''}" data-color="done" title="${t('color_done')}"></button>
+        <button class="color-btn progress ${(it.itemColor || 'search') === 'progress' ? 'active' : ''}" data-color="progress" title="${t('color_progress')}"></button>
+        <button class="color-btn search ${(it.itemColor || 'search') === 'search' ? 'active' : ''}" data-color="search" title="${t('color_search')}"></button>
+      </div>
+      <div class="name">
+        <label style="font-size:11px;color:var(--text-light);display:block;">&nbsp;</label>
+        <input type="text" data-field="name" value="${escapeHtml(it.name)}">
+        <select data-field="category" class="cat-select">
+          ${categoryKeys().map(c => `<option value="${c}" ${c === it.category ? "selected" : ""}>${escapeHtml(getCatName(c))}</option>`).join("")}
+        </select>
+      </div>
+      <div>
+        <label style="font-size:11px;color:var(--text-light);display:block;">${t("estimated")}</label>
+        <input type="number" data-field="estimated" value="${+it.estimated||0}" class="num">
+      </div>
+      <div>
+        <label style="font-size:11px;color:var(--text-light);display:block;">${t("actual")}</label>
+        <input type="number" data-field="actual" value="${+it.actual||0}" class="num">
+      </div>
+      <div>
+        <label style="font-size:11px;color:var(--text-light);display:block;">${t("advance_short")}</label>
+        <input type="number" data-field="advance" value="${+it.advance||0}" class="num">
+      </div>
+      <div>
+        <label style="font-size:11px;color:var(--text-light);display:block;">${t("status")}</label>
+        <select data-field="status">
+          <option value="planned"  ${it.status==="planned"  ?"selected":""}>${t("status_planned")}</option>
+          <option value="chosen"   ${it.status==="chosen"   ?"selected":""}>${t("status_chosen")}</option>
+          <option value="prepaid"  ${it.status==="prepaid"  ?"selected":""}>${t("status_prepaid")}</option>
+          <option value="paid"     ${it.status==="paid"     ?"selected":""}>${t("status_paid")}</option>
+          <option value="done"     ${it.status==="done"     ?"selected":""}>${t("status_done")}</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:11px;color:var(--text-light);display:block;">${t("deadline")}</label>
+        <input type="date" data-field="deadline" value="${escapeHtml(it.deadline||"")}">
+      </div>
+      <div>
+        <button class="btn-icon" data-action="delete" title="${t("delete")}">×</button>
+      </div>
+      <div class="full" style="grid-column: 1 / -1; margin-top:6px;">
+        <details ${it.notes ? "open" : ""}>
+          <summary>${t("note")} · ${t("rest")}: <b>${fmt(due)}</b></summary>
+          <textarea data-field="notes" rows="2" placeholder="${t("note")}">${escapeHtml(it.notes||"")}</textarea>
+        </details>
+      </div>
+    </div>`;
+  }).join("");
+
+  list.querySelectorAll(".item-row").forEach(row => {
+    const id = +row.dataset.id;
+    row.querySelectorAll("[data-field]").forEach(inp => {
+      inp.addEventListener("change", () => updateItem(id, inp.dataset.field, inp.value));
+      inp.addEventListener("input", () => updateItem(id, inp.dataset.field, inp.value, true));
+    });
+    const delBtn = row.querySelector('[data-action="delete"]');
+    if (delBtn) delBtn.addEventListener("click", () => confirmDelete(id));
+    
+    // Link button
+    const linkBtn = row.querySelector('[data-action="link"]');
+    if (linkBtn) {
+      linkBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const item = state.items.find(x => x.id === id);
+        if (!item) return;
+        
+        // If link exists and Ctrl/Cmd is pressed or it's a regular click on existing link
+        if (item.itemLink) {
+          // Open link in new window
+          window.open(item.itemLink, '_blank');
+        } else {
+          // If no link, prompt to add one
+          const url = prompt(t("add_link"), "");
+          if (url !== null && url.trim() !== "") {
+            item.itemLink = url.trim();
+            saveState();
+            render();
+          }
+        }
+      });
+      
+      // Right-click to edit
+      linkBtn.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        const item = state.items.find(x => x.id === id);
+        if (!item) return;
+        const url = prompt(t("edit_link"), item.itemLink || "");
+        if (url !== null) {
+          item.itemLink = url;
+          saveState();
+          render();
+        }
+      });
+    }
+    
+    // Color indicator buttons
+    row.querySelectorAll('.color-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const color = btn.dataset.color;
+        const item = state.items.find(x => x.id === id);
+        if (item) {
+          item.itemColor = color;
+          saveState();
+          render();
+        }
+      });
+    });
+  });
+}
+
+function updateItem(id, field, value, silent = false) {
+  const it = state.items.find(x => x.id === id);
+  if (!it) return;
+  if (["estimated","actual","advance"].includes(field)) value = +value || 0;
+  it[field] = value;
+  saveState();
+  if (silent) {
+    // typing — update dashboard and the live "К доплате" inside the same row
+    // (don't rerender the whole expense list — that would steal input focus)
+    updateRowDue(id);
+    renderDashboard();
+  } else {
+    // committed change — full rerender so dashboard, charts and rest of expenses sync up
+    renderDashboard();
+    renderExpenses();
+    renderCharts();
+    renderCategoriesEditor();
+  }
+}
+
+function updateRowDue(id) {
+  const it = state.items.find(x => x.id === id);
+  if (!it) return;
+  const aPrice = (+it.actual || 0) > 0 ? (+it.actual) : (+it.estimated || 0);
+  const due = Math.max(0, aPrice - (+it.advance || 0));
+  const row = document.querySelector('.item-row[data-id="' + id + '"]');
+  if (!row) return;
+  const summary = row.querySelector("details summary");
+  if (summary) {
+    const b = summary.querySelector("b");
+    if (b) b.textContent = fmt(due);
+  }
+}
+
+function confirmDelete(id) {
+  showModal(t("confirm_delete"), "", () => {
+    state.items = state.items.filter(x => x.id !== id);
+    saveState();
+    render();
+    toast(t("saved"));
+  });
+}
+
+function addItem() {
+  const newItem = {
+    id: state.nextItemId++,
+    name: state.language === "en" ? "New item" : (state.language === "ua" ? "Новий пункт" : "Новый пункт"),
+    category: "cat_other",
+    estimated: 0,
+    actual: 0,
+    advance: 0,
+    deadline: "",
+    status: "planned",
+    notes: "",
+  };
+  state.items.push(newItem);
+  saveState();
+  render();
+}
+
+function populateCategoryFilter() {
+  const sel = document.getElementById("filter-category");
+  if (!sel) return;
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">' + t("all_categories") + "</option>" +
+    categoryKeys().map(c => `<option value="${c}" ${c === cur ? "selected" : ""}>${escapeHtml(getCatName(c))}</option>`).join("");
+}
+
+/* =========================================================
+   RENDER: INCOMES
+========================================================= */
+function renderIncomes() {
+  const list = document.getElementById("incomes-list");
+  if (state.incomes.length === 0) {
+    list.innerHTML = '<div class="empty">' + t("no_incomes") + "</div>";
+    return;
+  }
+  const sorted = [...state.incomes].sort((a, b) => new Date(b.date) - new Date(a.date));
+  list.innerHTML = sorted.map(inc => {
+    const inUah = (inc.currency || "UAH") === "UAH" ? +inc.amount : (+inc.amount * (+inc.rate || 1));
+    return `<div class="income-row" data-id="${inc.id}">
+      <input type="date" data-field="date" value="${escapeHtml(inc.date||"")}">
+      <input type="text" data-field="source" value="${escapeHtml(inc.source||"")}">
+      <input type="number" data-field="amount" step="0.01" value="${+inc.amount||0}" class="num">
+      <select data-field="currency">
+        <option value="UAH" ${inc.currency==="UAH"?"selected":""}>UAH ₴</option>
+        <option value="USD" ${inc.currency==="USD"?"selected":""}>USD $</option>
+        <option value="EUR" ${inc.currency==="EUR"?"selected":""}>EUR €</option>
+      </select>
+      <input type="number" data-field="rate" step="0.01" value="${+inc.rate||1}" class="num" placeholder="${t('rate_placeholder')}">
+      <button class="btn-icon" data-action="delete-inc">×</button>
+      <div class="full" style="grid-column: 1 / -1; font-size:12px; color:var(--text-light); padding-top:4px;">
+        = <b>${fmt(inUah)}</b> ${t("income_in_uah")}
+      </div>
+    </div>`;
+  }).join("");
+
+  list.querySelectorAll(".income-row").forEach(row => {
+    const id = +row.dataset.id;
+    row.querySelectorAll("[data-field]").forEach(inp => {
+      inp.addEventListener("change", () => updateIncome(id, inp.dataset.field, inp.value));
+    });
+    const delBtn = row.querySelector('[data-action="delete-inc"]');
+    if (delBtn) delBtn.addEventListener("click", () => deleteIncome(id));
+  });
+}
+
+function updateIncome(id, field, value) {
+  const inc = state.incomes.find(x => x.id === id);
+  if (!inc) return;
+  if (["amount","rate"].includes(field)) value = +value || 0;
+  inc[field] = value;
+  saveState();
+  render();
+}
+
+function deleteIncome(id) {
+  showModal(t("confirm_delete"), "", () => {
+    state.incomes = state.incomes.filter(x => x.id !== id);
+    saveState();
+    render();
+  });
+}
+
+function addIncomeFromForm() {
+  const date = document.getElementById("inc-date").value;
+  const source = document.getElementById("inc-source").value.trim();
+  const amount = +document.getElementById("inc-amount").value || 0;
+  const currency = document.getElementById("inc-currency").value;
+  const rate = +document.getElementById("inc-rate").value || (currency === "UAH" ? 1 : (currency === "USD" ? 42 : 45));
+  if (!date || !source || !amount) {
+    toast(t("fill_date_source_amount"));
+    return;
+  }
+  state.incomes.push({
+    id: state.nextIncomeId++,
+    date, source, amount, currency, rate, notes: "",
+  });
+  saveState();
+  document.getElementById("inc-source").value = "";
+  document.getElementById("inc-amount").value = "";
+  render();
+  toast(t("saved"));
+}
+
+/* =========================================================
+   CHARTS
+========================================================= */
+let charts = {};
+
+function destroyCharts() {
+  Object.values(charts).forEach(c => c && c.destroy());
+  charts = {};
+}
+
+function renderCharts() {
+  if (document.getElementById("panel-charts").classList.contains("active") === false) return;
+  destroyCharts();
+  const palette = ["#e8b4bc","#b8d8c8","#f4d8a8","#d28a96","#8dbfa8","#e0b87a","#c8a8d8","#a8c8d8","#d8c8a8","#bcd0a8","#d0a8bc","#a8d0d0","#b0a8d8","#d8b0a8"];
+  const tot = computeTotals();
+
+  // 1. by category
+  const byCat = {};
+  state.items.forEach(it => {
+    const aPrice = (+it.actual || 0) > 0 ? (+it.actual) : (+it.estimated || 0);
+    byCat[it.category] = (byCat[it.category] || 0) + aPrice;
+  });
+  const catEntries = Object.entries(byCat).filter(([_, v]) => v > 0).sort((a,b) => b[1]-a[1]);
+  charts.cat = new Chart(document.getElementById("chart-categories"), {
+    type: "doughnut",
+    data: {
+      labels: catEntries.map(([k]) => getCatName(k)),
+      datasets: [{
+        data: catEntries.map(([, v]) => v),
+        backgroundColor: catEntries.map((_, i) => palette[i % palette.length]),
+        borderWidth: 2, borderColor: "#fff",
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: "right", labels: { font: { size: 11 }, boxWidth: 12 } } },
+    },
+  });
+
+  // 2. by status
+  const statusKeys = ["planned","chosen","prepaid","paid","done"];
+  const byStatus = {};
+  statusKeys.forEach(s => byStatus[s] = 0);
+  state.items.forEach(it => {
+    const aPrice = (+it.actual || 0) > 0 ? (+it.actual) : (+it.estimated || 0);
+    byStatus[it.status] = (byStatus[it.status] || 0) + aPrice;
+  });
+  charts.status = new Chart(document.getElementById("chart-status"), {
+    type: "bar",
+    data: {
+      labels: statusKeys.map(s => t("status_" + s)),
+      datasets: [{
+        label: t("budget_total"),
+        data: statusKeys.map(s => byStatus[s]),
+        backgroundColor: ["#f0e9e2","#f5d0a8","#f4d8a8","#b8d8c8","#8dbfa8"],
+        borderRadius: 8,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => fmtRaw(v) } } },
+    },
+  });
+
+  // 3. paid vs rest, top by total — advance counts as paid regardless of status
+  const top = [...state.items].map(it => {
+    const aPrice = (+it.actual || 0) > 0 ? (+it.actual) : (+it.estimated || 0);
+    const adv = Math.max(0, Math.min(+it.advance || 0, aPrice));
+    const fullyPaid = (it.status === "paid" || it.status === "done") ? aPrice : adv;
+    const rest = Math.max(0, aPrice - fullyPaid);
+    return { name: it.name, paid: fullyPaid, rest };
+  }).sort((a,b) => (b.paid + b.rest) - (a.paid + a.rest)).slice(0, 8);
+  charts.pr = new Chart(document.getElementById("chart-paid-rest"), {
+    type: "bar",
+    data: {
+      labels: top.map(x => x.name.length > 18 ? x.name.slice(0,18) + "…" : x.name),
+      datasets: [
+        { label: t("paid"), data: top.map(x => x.paid), backgroundColor: "#8dbfa8", borderRadius: 6, stack: "s" },
+        { label: t("rest"), data: top.map(x => x.rest), backgroundColor: "#e8b4bc", borderRadius: 6, stack: "s" },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: "y",
+      plugins: { legend: { position: "top" } },
+      scales: { x: { stacked: true, ticks: { callback: v => fmtRaw(v) } }, y: { stacked: true } },
+    },
+  });
+
+  // 4. income timeline
+  const incomes = [...state.incomes].sort((a, b) => new Date(a.date) - new Date(b.date));
+  let cum = 0;
+  const points = incomes.map(inc => {
+    const inUah = (inc.currency || "UAH") === "UAH" ? +inc.amount : (+inc.amount * (+inc.rate || 1));
+    cum += inUah;
+    return { x: inc.date, y: cum };
+  });
+  charts.tl = new Chart(document.getElementById("chart-income-timeline"), {
+    type: "line",
+    data: {
+      labels: points.map(p => dateOnly(p.x)),
+      datasets: [
+        {
+          label: t("income_total"),
+          data: points.map(p => p.y),
+          borderColor: "#d28a96",
+          backgroundColor: "rgba(232, 180, 188, 0.2)",
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: "#d28a96",
+        },
+        {
+          label: t("budget_total"),
+          data: points.map(() => +state.totalBudget || 0),
+          borderColor: "#8dbfa8",
+          borderDash: [6, 4],
+          pointRadius: 0,
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: "top" } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => fmtRaw(v) } } },
+    },
+  });
+
+  // 5. cushion timeline
+  ensureCushion();
+  const cushionEl = document.getElementById("chart-cushion-timeline");
+  if (cushionEl) {
+    const cur = state.cushion.goalCurrency || "USD";
+    const cdeps = [...state.cushion.deposits].sort((a, b) => new Date(a.date) - new Date(b.date));
+    let cum = 0;
+    const cpoints = cdeps.map(d => { cum += depositInGoal(d); return { x: d.date, y: cum }; });
+    charts.ct = new Chart(cushionEl, {
+      type: "line",
+      data: {
+        labels: cpoints.map(p => dateOnly(p.x)),
+        datasets: [
+          {
+            label: t("cushion_saved") + " (" + cur + ")",
+            data: cpoints.map(p => p.y),
+            borderColor: "#8dbfa8",
+            backgroundColor: "rgba(184, 216, 200, 0.25)",
+            fill: true,
+            tension: 0.3,
+            pointRadius: 4,
+            pointBackgroundColor: "#8dbfa8",
+          },
+          {
+            label: t("cushion_goal"),
+            data: cpoints.map(() => +state.cushion.goalAmount || 0),
+            borderColor: "#d28a96",
+            borderDash: [6, 4],
+            pointRadius: 0,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: "top" } },
+        scales: { y: { beginAtZero: true } },
+      },
+    });
+  }
+}
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+function renderSettings() {
+  document.getElementById("set-budget").value = state.totalBudget || 0;
+  document.getElementById("set-date").value = state.weddingDate || "";
+}
+
+/* =========================================================
+   IMPORT / EXPORT
+========================================================= */
+function exportJson() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const ts = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = "wedding-budget-" + ts + ".json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast(t("exported"));
+}
+
+function importJsonFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data || !Array.isArray(data.items)) throw new Error("bad");
+      showModal(t("confirm_import"), t("confirm_import_text"), () => {
+        state = data;
+        // backwards compat
+        if (!state.nextItemId) state.nextItemId = (state.items.reduce((m, x) => Math.max(m, x.id), 0) || 0) + 1;
+        if (!state.nextIncomeId) state.nextIncomeId = (state.incomes.reduce((m, x) => Math.max(m, x.id), 0) || 0) + 1;
+        saveState();
+        applyI18n();
+        toast(t("imported"));
+      });
+    } catch (e) {
+      toast("Invalid JSON");
+    }
+  };
+  reader.readAsText(file);
+}
+
+function resetAll() {
+  showModal(t("confirm_reset"), t("confirm_reset_text"), () => {
+    state = {
+      weddingDate: "2026-09-18",
+      totalBudget: 500000,
+      language: state.language,
+      items: [],
+      incomes: [],
+      cushion: { goalAmount: 10000, goalCurrency: "USD", rateToUah: 42, deposits: [], nextDepositId: 1 },
+      categories: DEFAULT_CATEGORY_KEYS.map(k => ({ key: k, customName: null })),
+      nextItemId: 1,
+      nextIncomeId: 1,
+      nextCategoryId: 1,
+    };
+    saveState();
+    applyI18n();
+  });
+}
+
+function restoreAll() {
+  const backupKey = 'BACKUP_' + STORAGE_KEY;
+  const backup = localStorage.getItem(backupKey);
   
-  document.getElementById('password-input').focus();
-  checkPassword();
+  if (!backup) {
+    showModal(t("no_backup"), "К сожалению, резервная копия не найдена. Попробуй позже, после того как сделаешь какие-то изменения.", () => {});
+    return;
+  }
+  
+  showModal(t("confirm_restore"), t("confirm_restore_text"), () => {
+    try {
+      state = JSON.parse(backup);
+      saveState();
+      applyI18n();
+      showModal("✅ Успешно!", "Данные восстановлены из последней резервной копии.", () => {
+        location.reload();
+      });
+    } catch (e) {
+      showModal("❌ Ошибка", "Не удалось восстановить данные. " + e.message, () => {});
+    }
+  });
+}
+
+function reseed() {
+  showModal(t("confirm_seed"), t("confirm_seed_text"), () => {
+    const lang = state.language;
+    state = JSON.parse(JSON.stringify(DEFAULT_SEED));
+    state.language = lang;
+    saveState();
+    applyI18n();
+  });
+}
+
+/* =========================================================
+   MODAL & TOAST
+========================================================= */
+function showModal(title, text, onOk) {
+  document.getElementById("modal-title").textContent = title;
+  document.getElementById("modal-text").textContent = text || "";
+  const bg = document.getElementById("modal-bg");
+  bg.classList.add("show");
+  const ok = document.getElementById("modal-ok");
+  const cancel = document.getElementById("modal-cancel");
+  const close = () => {
+    bg.classList.remove("show");
+    ok.removeEventListener("click", onOkHandler);
+    cancel.removeEventListener("click", close);
+  };
+  const onOkHandler = () => {
+    close();
+    if (onOk) onOk();
+  };
+  ok.addEventListener("click", onOkHandler);
+  cancel.addEventListener("click", close);
+}
+
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 1800);
+}
+
+/* =========================================================
+   CUSHION
+========================================================= */
+function ensureCushion() {
+  if (!state.cushion) {
+    state.cushion = { goalAmount: 10000, goalCurrency: "USD", rateToUah: 42, deposits: [], nextDepositId: 1 };
+  }
+  if (!Array.isArray(state.cushion.deposits)) state.cushion.deposits = [];
+  if (!state.cushion.nextDepositId) state.cushion.nextDepositId = (state.cushion.deposits.reduce((m, x) => Math.max(m, x.id || 0), 0) || 0) + 1;
+}
+
+function depositInGoal(dep) {
+  // returns deposit amount converted to cushion goal currency
+  ensureCushion();
+  const goalCur = state.cushion.goalCurrency || "USD";
+  const goalRate = +state.cushion.rateToUah || 42; // UAH per 1 unit of goalCur
+  const amt = +dep.amount || 0;
+  const cur = dep.currency || "UAH";
+  const r = +dep.rate || 1; // UAH per 1 unit of dep.currency
+  // first to UAH
+  const inUah = cur === "UAH" ? amt : amt * r;
+  // then to goal currency
+  if (goalCur === "UAH") return inUah;
+  return inUah / goalRate;
+}
+
+function computeCushion() {
+  ensureCushion();
+  const c = state.cushion;
+  let saved = 0;
+  c.deposits.forEach(d => { saved += depositInGoal(d); });
+  const goal = +c.goalAmount || 0;
+  const left = Math.max(0, goal - saved);
+  const months = monthsUntilWedding();
+  const monthly = (months && months > 0) ? left / months : 0;
+  return { saved, goal, left, monthly, currency: c.goalCurrency || "USD", count: c.deposits.length };
+}
+
+function renderCushion() {
+  ensureCushion();
+  const c = state.cushion;
+  const r = computeCushion();
+
+  document.getElementById("cushion-goal-display").textContent = fmtCur(r.goal, r.currency);
+  document.getElementById("cushion-saved").textContent = fmtCur(r.saved, r.currency);
+  const pct = r.goal ? Math.round((r.saved / r.goal) * 100) : 0;
+  document.getElementById("cushion-saved-pct").textContent = pct + "% " + t("cushion_goal").toLowerCase();
+  document.getElementById("cushion-left").textContent = fmtCur(r.left, r.currency);
+  if (r.monthly > 0) {
+    document.getElementById("cushion-monthly-need").textContent = fmtCur(r.monthly, r.currency) + " " + t("cushion_monthly");
+  } else {
+    document.getElementById("cushion-monthly-need").textContent = "";
+  }
+  document.getElementById("cushion-count").textContent = r.count;
+  // last deposit
+  if (c.deposits.length > 0) {
+    const sorted = [...c.deposits].sort((a, b) => new Date(b.date) - new Date(a.date));
+    document.getElementById("cushion-last").textContent = t("cushion_last") + ": " + dateOnly(sorted[0].date);
+  } else {
+    document.getElementById("cushion-last").textContent = "";
+  }
+  document.getElementById("cushion-bar").style.width = Math.min(100, pct) + "%";
+
+  // settings
+  document.getElementById("cushion-goal-amount").value = r.goal;
+  document.getElementById("cushion-goal-currency").value = r.currency;
+  document.getElementById("cushion-rate").value = +c.rateToUah || 42;
+
+  // deposits list
+  const list = document.getElementById("cushion-list");
+  if (c.deposits.length === 0) {
+    list.innerHTML = '<div class="empty">' + t("cushion_no_deposits") + "</div>";
+    return;
+  }
+  const sorted = [...c.deposits].sort((a, b) => new Date(b.date) - new Date(a.date));
+  list.innerHTML = sorted.map(dep => {
+    const inGoal = depositInGoal(dep);
+    return `<div class="income-row" data-id="${dep.id}">
+      <input type="date" data-field="date" value="${escapeHtml(dep.date||"")}">
+      <input type="text" data-field="notes" value="${escapeHtml(dep.notes||"")}">
+      <input type="number" data-field="amount" step="0.01" value="${+dep.amount||0}" class="num">
+      <select data-field="currency">
+        <option value="UAH" ${dep.currency==="UAH"?"selected":""}>UAH ₴</option>
+        <option value="USD" ${dep.currency==="USD"?"selected":""}>USD $</option>
+        <option value="EUR" ${dep.currency==="EUR"?"selected":""}>EUR €</option>
+      </select>
+      <input type="number" data-field="rate" step="0.01" value="${+dep.rate||1}" class="num" placeholder="${t('rate_placeholder')}">
+      <button class="btn-icon" data-action="delete-cdep">×</button>
+      <div class="full" style="grid-column: 1 / -1; font-size:12px; color:var(--text-light); padding-top:4px;">
+        = <b>${fmtCur(inGoal, r.currency)}</b> ${t("converted_to_goal")}
+      </div>
+    </div>`;
+  }).join("");
+
+  list.querySelectorAll(".income-row").forEach(row => {
+    const id = +row.dataset.id;
+    row.querySelectorAll("[data-field]").forEach(inp => {
+      inp.addEventListener("change", () => updateCushionDep(id, inp.dataset.field, inp.value));
+    });
+    const delBtn = row.querySelector('[data-action="delete-cdep"]');
+    if (delBtn) delBtn.addEventListener("click", () => deleteCushionDep(id));
+  });
+}
+
+function updateCushionDep(id, field, value) {
+  ensureCushion();
+  const dep = state.cushion.deposits.find(x => x.id === id);
+  if (!dep) return;
+  if (["amount","rate"].includes(field)) value = +value || 0;
+  dep[field] = value;
+  saveState();
+  renderCushion();
+  renderCharts();
+}
+
+function deleteCushionDep(id) {
+  showModal(t("confirm_delete"), "", () => {
+    state.cushion.deposits = state.cushion.deposits.filter(x => x.id !== id);
+    saveState();
+    renderCushion();
+    renderCharts();
+  });
+}
+
+function addCushionDepFromForm() {
+  ensureCushion();
+  const date = document.getElementById("cdep-date").value;
+  const notes = document.getElementById("cdep-note").value.trim();
+  const amount = +document.getElementById("cdep-amount").value || 0;
+  const currency = document.getElementById("cdep-currency").value;
+  const rate = +document.getElementById("cdep-rate").value || (currency === "UAH" ? 1 : (currency === "USD" ? (+state.cushion.rateToUah || 42) : 45));
+  if (!date || !amount) {
+    toast(t("fill_date_amount"));
+    return;
+  }
+  state.cushion.deposits.push({
+    id: state.cushion.nextDepositId++,
+    date, notes, amount, currency, rate,
+  });
+  saveState();
+  document.getElementById("cdep-note").value = "";
+  document.getElementById("cdep-amount").value = "";
+  renderCushion();
+  renderCharts();
+  toast(t("saved"));
+}
+
+/* =========================================================
+   CATEGORIES MANAGEMENT
+========================================================= */
+function categoryUsage(key) {
+  return state.items.filter(it => it.category === key).length;
+}
+
+function renderCategoriesEditor() {
+  ensureCategories();
+  const list = document.getElementById("cats-list");
+  if (!list) return;
+  list.innerHTML = state.categories.map(c => {
+    const isCustom = c.key.startsWith("custom_");
+    const isRenamed = !!c.customName;
+    const usage = categoryUsage(c.key);
+    const badge = isCustom
+      ? `<span class="badge custom">${t("cats_custom")}</span>`
+      : `<span class="badge">${t("cats_default")}</span>`;
+    return `<div class="cat-row" data-key="${escapeHtml(c.key)}">
+      <span class="cat-name ${isCustom ? "is-custom" : ""}" data-role="display">${escapeHtml(getCatName(c.key))}</span>
+      ${badge}
+      <span class="cat-usage">${usage} ${t("cats_used")}</span>
+      <button class="btn-icon edit" data-action="edit" title="${t("cats_save")}">✎</button>
+      ${isRenamed && !isCustom ? `<button class="btn-icon" data-action="reset" title="${t("cats_reset_name")}">↺</button>` : ""}
+      <button class="btn-icon" data-action="delete" title="${t("delete")}">×</button>
+    </div>`;
+  }).join("");
+
+  list.querySelectorAll(".cat-row").forEach(row => {
+    const key = row.dataset.key;
+    const editBtn = row.querySelector('[data-action="edit"]');
+    if (editBtn) editBtn.addEventListener("click", () => startEditCategory(row, key));
+    const resetBtn = row.querySelector('[data-action="reset"]');
+    if (resetBtn) resetBtn.addEventListener("click", () => resetCategoryName(key));
+    const delBtn = row.querySelector('[data-action="delete"]');
+    if (delBtn) delBtn.addEventListener("click", () => deleteCustomCategory(key));
+  });
+}
+
+function startEditCategory(row, key) {
+  const nameEl = row.querySelector('[data-role="display"]');
+  if (!nameEl) return;
+  const cur = getCatName(key);
+  // replace with input
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = cur;
+  nameEl.replaceWith(input);
+  input.focus();
+  input.select();
+  // hide other action buttons during edit
+  const editBtn = row.querySelector('[data-action="edit"]');
+  if (editBtn) editBtn.textContent = "✓";
+  const finish = () => {
+    const newName = input.value.trim();
+    if (newName && newName !== cur) {
+      const c = state.categories.find(x => x.key === key);
+      if (c) {
+        c.customName = newName;
+        saveState();
+        toast(t("saved"));
+      }
+    }
+    render();
+  };
+  const cancel = () => render();
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") finish();
+    if (e.key === "Escape") cancel();
+  });
+  input.addEventListener("blur", finish);
+}
+
+function resetCategoryName(key) {
+  const c = state.categories.find(x => x.key === key);
+  if (!c) return;
+  c.customName = null;
+  saveState();
+  render();
+  toast(t("saved"));
+}
+
+function addCustomCategory() {
+  ensureCategories();
+  const input = document.getElementById("new-cat-name");
+  const name = input.value.trim();
+  if (!name) return;
+  const newKey = "custom_" + state.nextCategoryId++;
+  state.categories.push({ key: newKey, customName: name });
+  saveState();
+  input.value = "";
+  render();
+  toast(t("saved"));
+}
+
+function deleteCustomCategory(key) {
+  const usage = categoryUsage(key);
+  if (usage > 0) {
+    toast(t("cats_in_use"));
+    return;
+  }
+  showModal(t("confirm_delete"), "", () => {
+    state.categories = state.categories.filter(c => c.key !== key);
+    saveState();
+    render();
+  });
+}
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+let calendarYear = null;
+let calendarMonth = null;
+let selectedCalendarDate = null;
+
+function initCalendarYear() {
+  if (calendarYear !== null) return;
+  const today = new Date();
+  if (state.weddingDate) {
+    const wedding = new Date(state.weddingDate);
+    calendarYear = wedding.getFullYear();
+    calendarMonth = wedding.getMonth();
+  } else {
+    calendarYear = today.getFullYear();
+    calendarMonth = today.getMonth();
+  }
+}
+
+function dateStrUtc(year, month, day) {
+  return year + "-" + String(month + 1).padStart(2, "0") + "-" + String(day).padStart(2, "0");
+}
+
+function buildCalendarEvents() {
+  const events = {}; // date string → array of events
+  const add = (ds, ev) => {
+    if (!ds) return;
+    if (!events[ds]) events[ds] = [];
+    events[ds].push(ev);
+  };
+  // Wedding day
+  if (state.weddingDate) {
+    add(state.weddingDate, { type: "wedding", title: t("cal_event_wedding") });
+  }
+  // Expense deadlines
+  state.items.forEach(it => {
+    if (it.deadline) {
+      const aPrice = (+it.actual || 0) > 0 ? (+it.actual) : (+it.estimated || 0);
+      const due = Math.max(0, aPrice - (+it.advance || 0));
+      add(it.deadline, {
+        type: "deadline",
+        title: it.name,
+        amount: due,
+        currency: "UAH",
+        category: getCatName(it.category),
+        status: it.status,
+        itemId: it.id,
+      });
+    }
+  });
+  // Incomes
+  state.incomes.forEach(inc => {
+    if (inc.date) {
+      add(inc.date, {
+        type: "income",
+        title: inc.source || t("cal_event_income"),
+        amount: +inc.amount || 0,
+        currency: inc.currency || "UAH",
+      });
+    }
+  });
+  // Cushion deposits
+  ensureCushion();
+  state.cushion.deposits.forEach(dep => {
+    if (dep.date) {
+      add(dep.date, {
+        type: "cushion",
+        title: dep.notes || t("cal_event_cushion"),
+        amount: +dep.amount || 0,
+        currency: dep.currency || "UAH",
+      });
+    }
+  });
+  return events;
+}
+
+function buildMonthHtml(year, month, events) {
+  const monthNames = I18N[state.language].months_full || I18N.ru.months_full;
+  const dayHeaders = I18N[state.language].days_short || I18N.ru.days_short;
+  // Mon=0 .. Sun=6
+  const firstDayJs = new Date(year, month, 1).getDay(); // 0=Sun
+  const startOffset = (firstDayJs === 0) ? 6 : firstDayJs - 1;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const todayStr = dateStrUtc(today.getFullYear(), today.getMonth(), today.getDate());
+
+  let cells = "";
+  for (let i = 0; i < startOffset; i++) cells += '<div class="cal-day empty"></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const ds = dateStrUtc(year, month, d);
+    const evs = events[ds] || [];
+    const classes = ["cal-day"];
+    const dow = (startOffset + d - 1) % 7;
+    if (dow >= 5) classes.push("weekend");
+    if (evs.length > 0) classes.push("has-event");
+    if (evs.some(e => e.type === "wedding")) classes.push("wedding");
+    if (ds === todayStr) classes.push("today");
+    if (ds === selectedCalendarDate) classes.push("selected");
+
+    // dot indicators
+    const types = new Set(evs.filter(e => e.type !== "wedding").map(e => e.type));
+    const dots = Array.from(types).slice(0, 3).map(tp => `<i class="${tp}"></i>`).join("");
+
+    // Custom hover tooltip
+    let tip = "";
+    if (evs.length > 0) {
+      const lines = evs.map(e => {
+        const amt = (e.amount && e.type !== "wedding") ? `<span class="cal-tip-amt">${escapeHtml(fmtCur(e.amount, e.currency || "UAH"))}</span>` : "";
+        return `<div class="cal-tip-line"><span class="cal-tip-icon ${e.type}"></span><span class="cal-tip-name">${escapeHtml(e.title)}</span>${amt}</div>`;
+      }).join("");
+      tip = `<div class="cal-tip">${lines}</div>`;
+    }
+    cells += `<div class="${classes.join(" ")}" data-date="${ds}">${d}${dots ? `<span class="dots">${dots}</span>` : ""}${tip}</div>`;
+  }
+
+  return `<div class="cal-month">
+    <div class="cal-month-title">${escapeHtml(monthNames[month])}</div>
+    <div class="cal-days-header">${dayHeaders.map(d => `<span>${escapeHtml(d)}</span>`).join("")}</div>
+    <div class="cal-days">${cells}</div>
+  </div>`;
+}
+
+function renderCalendar() {
+  initCalendarYear();
+  const grid = document.getElementById("cal-grid");
+  if (!grid) return;
+  const events = buildCalendarEvents();
+  const html = buildMonthHtml(calendarYear, calendarMonth, events);
+  grid.innerHTML = html;
+  
+  // Update month/year display according to language
+  const monthNames = I18N[state.language].months_full || I18N.ru.months_full;
+  document.getElementById("cal-year").textContent = monthNames[calendarMonth] + " " + calendarYear;
+
+  grid.querySelectorAll(".cal-day:not(.empty)").forEach(el => {
+    el.addEventListener("click", () => selectCalendarDate(el.dataset.date));
+  });
+
+  if (selectedCalendarDate) renderCalendarDetails();
+  else document.getElementById("cal-details").style.display = "none";
+}
+
+function selectCalendarDate(ds) {
+  selectedCalendarDate = ds;
+  document.querySelectorAll(".cal-day").forEach(el => {
+    el.classList.toggle("selected", el.dataset.date === ds);
+  });
+  renderCalendarDetails();
+}
+
+function renderCalendarDetails() {
+  const card = document.getElementById("cal-details");
+  if (!selectedCalendarDate) { card.style.display = "none"; return; }
+  card.style.display = "block";
+  const events = buildCalendarEvents();
+  const evs = events[selectedCalendarDate] || [];
+  document.getElementById("cal-selected-title").textContent = dateOnly(selectedCalendarDate);
+
+  const list = document.getElementById("cal-events-list");
+  if (evs.length === 0) {
+    list.innerHTML = `<div class="empty">${t("cal_no_events")}</div>`;
+    return;
+  }
+  // Order: wedding first, then deadline, then income, then cushion
+  const orderMap = { wedding: 0, deadline: 1, income: 2, cushion: 3 };
+  const ordered = [...evs].sort((a, b) => (orderMap[a.type] ?? 9) - (orderMap[b.type] ?? 9));
+  list.innerHTML = ordered.map(e => {
+    const tagText = t("cal_event_" + e.type);
+    const amt = e.amount ? `<div class="event-amt">${fmtCur(e.amount, e.currency || "UAH")}</div>` : "";
+    let meta = "";
+    if (e.type === "deadline") {
+      const parts = [];
+      if (e.category) parts.push(escapeHtml(e.category));
+      if (e.status) parts.push(t("status_" + e.status));
+      if (e.amount) parts.push(t("cal_due_label"));
+      meta = `<div class="event-meta">${parts.join(" · ")}</div>`;
+    }
+    return `<div class="event-row ${e.type}">
+      <span class="event-tag ${e.type}">${escapeHtml(tagText)}</span>
+      <div class="event-body">
+        <div class="event-title">${escapeHtml(e.title)}</div>
+        ${meta}
+      </div>
+      ${amt}
+    </div>`;
+  }).join("");
+}
+
+function jumpToWedding() {
+  if (!state.weddingDate) return;
+  const d = new Date(state.weddingDate);
+  calendarYear = d.getFullYear();
+  calendarMonth = d.getMonth();
+  selectedCalendarDate = null;
+  renderCalendar();
+  selectCalendarDate(state.weddingDate);
+  setTimeout(() => {
+    const el = document.querySelector('.cal-day[data-date="' + state.weddingDate + '"]');
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 50);
+}
+
+function jumpToToday() {
+  const today = new Date();
+  calendarYear = today.getFullYear();
+  calendarMonth = today.getMonth();
+  selectedCalendarDate = null;
+  renderCalendar();
+  const ds = dateStrUtc(today.getFullYear(), today.getMonth(), today.getDate());
+  selectCalendarDate(ds);
+  setTimeout(() => {
+    const el = document.querySelector('.cal-day[data-date="' + ds + '"]');
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 50);
+}
+
+/* =========================================================
+   RENDER MASTER
+========================================================= */
+function render() {
+  renderDashboard();
+  renderExpenses();
+  renderIncomes();
+  renderCushion();
+  renderCategoriesEditor();
+  renderCalendar();
+  renderCharts();
+  renderSettings();
+}
+
+/* =========================================================
+   TABS & EVENTS
+========================================================= */
+function setupTabs() {
+  document.querySelectorAll("nav.tabs button").forEach(b => {
+    b.addEventListener("click", () => {
+      document.querySelectorAll("nav.tabs button").forEach(x => x.classList.remove("active"));
+      b.classList.add("active");
+      document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+      const target = b.dataset.tab;
+      document.getElementById("panel-" + target).classList.add("active");
+      if (target === "charts") renderCharts();
+    });
+  });
+}
+
+function setupLang() {
+  document.querySelectorAll(".lang-switch button").forEach(b => {
+    b.addEventListener("click", () => {
+      state.language = b.dataset.lang;
+      saveState();
+      applyI18n();
+    });
+  });
+}
+
+function setupColor() {
+  try {
+    const colorSchemes = {
+      peach: {
+        bg: "#fef5f1",
+        primary: "#ffc2a5",
+        header: "linear-gradient(135deg, #ffb089 0%, #ffc2a5 100%)",
+        accent: "#ffc2a5",
+        "accent-light": "#ffe8d1",
+        sage: "#ffd4b3",
+        "sage-light": "#ffe8d1",
+        blush: "#ffb089",
+        "blush-light": "#ffd4b3",
+        warm: "#ffc2a5",
+        border: "#ffe8d1"
+      },
+      mint: {
+        bg: "#f0f8fb",
+        primary: "#a8d4b8",
+        header: "linear-gradient(135deg, #8fc6a1 0%, #a8d4b8 100%)",
+        accent: "#a8d4b8",
+        "accent-light": "#d0e8db",
+        sage: "#a8d4b8",
+        "sage-light": "#d0e8db",
+        blush: "#d0e8db",
+        "blush-light": "#e5f3eb",
+        warm: "#c8dcc8",
+        border: "#d0e8db"
+      },
+      coral: {
+        bg: "#fef3f0",
+        primary: "#f4a895",
+        header: "linear-gradient(135deg, #e89876 0%, #f4a895 100%)",
+        accent: "#f4a895",
+        "accent-light": "#f9d1c5",
+        sage: "#f4a895",
+        "sage-light": "#f9d1c5",
+        blush: "#e89876",
+        "blush-light": "#f9d1c5",
+        warm: "#f4a895",
+        border: "#f9d1c5"
+      }
+    };
+    
+    const currentColor = state.headerColor || "peach";
+    if (colorSchemes[currentColor]) {
+      applyColorScheme(colorSchemes[currentColor]);
+    }
+    
+    document.querySelectorAll(".color-btn").forEach(btn => {
+      btn.classList.remove("active");
+      if (btn.dataset.color === currentColor) {
+        btn.classList.add("active");
+      }
+    });
+    
+    document.querySelectorAll(".color-btn").forEach(b => {
+      b.addEventListener("click", () => {
+        const color = b.dataset.color;
+        const scheme = colorSchemes[color];
+        
+        applyColorScheme(scheme);
+        if (document.querySelector("header")) {
+          document.querySelector("header").style.background = scheme.header;
+        }
+        
+        document.querySelectorAll(".color-btn").forEach(btn => btn.classList.remove("active"));
+        b.classList.add("active");
+        
+        state.headerColor = color;
+        saveState();
+      });
+    });
+  } catch (e) {
+    console.error("Color setup error:", e);
+  }
+}
+
+function applyColorScheme(scheme) {
+  Object.entries(scheme).forEach(([key, value]) => {
+    if (key === "header") {
+      document.querySelector("header").style.background = value;
+    } else {
+      document.documentElement.style.setProperty(`--${key}`, value);
+    }
+  });
+}
+
+function setupEvents() {
+  document.getElementById("btn-add-item").addEventListener("click", addItem);
+  document.getElementById("search-items").addEventListener("input", renderExpenses);
+  document.getElementById("filter-status").addEventListener("change", renderExpenses);
+  document.getElementById("filter-category").addEventListener("change", renderExpenses);
+  document.getElementById("btn-add-income").addEventListener("click", addIncomeFromForm);
+
+  document.getElementById("set-budget").addEventListener("change", e => {
+    state.totalBudget = +e.target.value || 0;
+    saveState(); render();
+  });
+  document.getElementById("set-date").addEventListener("change", e => {
+    state.weddingDate = e.target.value;
+    saveState(); render();
+  });
+
+  document.getElementById("btn-export").addEventListener("click", exportJson);
+  document.getElementById("btn-import").addEventListener("click", () => document.getElementById("file-import").click());
+  document.getElementById("file-import").addEventListener("change", e => {
+    const f = e.target.files && e.target.files[0];
+    if (f) importJsonFile(f);
+    e.target.value = "";
+  });
+  document.getElementById("btn-reset").addEventListener("click", resetAll);
+  document.getElementById("btn-restore").addEventListener("click", restoreAll);
+  document.getElementById("btn-seed").addEventListener("click", reseed);
+
+  // Cushion events
+  document.getElementById("btn-add-cushion-dep").addEventListener("click", addCushionDepFromForm);
+  document.getElementById("cushion-goal-amount").addEventListener("change", e => {
+    ensureCushion();
+    state.cushion.goalAmount = +e.target.value || 0;
+    saveState(); renderCushion(); renderCharts();
+  });
+  document.getElementById("cushion-goal-currency").addEventListener("change", e => {
+    ensureCushion();
+    state.cushion.goalCurrency = e.target.value;
+    saveState(); renderCushion(); renderCharts();
+  });
+  document.getElementById("cushion-rate").addEventListener("change", e => {
+    ensureCushion();
+    state.cushion.rateToUah = +e.target.value || 42;
+    saveState(); renderCushion(); renderCharts();
+  });
+
+  // Category management
+  document.getElementById("btn-add-cat").addEventListener("click", addCustomCategory);
+  document.getElementById("new-cat-name").addEventListener("keydown", e => {
+    if (e.key === "Enter") addCustomCategory();
+  });
+
+  // Calendar
+  document.getElementById("cal-prev-year").addEventListener("click", () => {
+    initCalendarYear();
+    calendarMonth--;
+    if (calendarMonth < 0) {
+      calendarMonth = 11;
+      calendarYear--;
+    }
+    selectedCalendarDate = null;
+    renderCalendar();
+  });
+  document.getElementById("cal-next-year").addEventListener("click", () => {
+    initCalendarYear();
+    calendarMonth++;
+    if (calendarMonth > 11) {
+      calendarMonth = 0;
+      calendarYear++;
+    }
+    selectedCalendarDate = null;
+    renderCalendar();
+  });
+  document.getElementById("cal-go-wedding").addEventListener("click", jumpToWedding);
+  document.getElementById("cal-go-today").addEventListener("click", jumpToToday);
+  document.getElementById("cal-close-details").addEventListener("click", () => {
+    selectedCalendarDate = null;
+    document.querySelectorAll(".cal-day.selected").forEach(el => el.classList.remove("selected"));
+    document.getElementById("cal-details").style.display = "none";
+  });
+}
+
+function init() {
+  // default income date
+  const today = new Date().toISOString().slice(0,10);
+  document.getElementById("inc-date").value = today;
+  document.getElementById("cdep-date").value = today;
+  
+  // Initialize save time
+  const saveTime = document.getElementById("save-time");
+  if (saveTime) {
+    saveTime.textContent = formatTime(new Date());
+  }
+
+setupTabs();
+  setupLang();
+  setupColor();
+  setupEvents();
+  applyI18n();
+}
+
+let guestData = { ny: [], nm: [], my: [], mm: [] };
+let carsData = [];
+
+function initGuests() {
+  try {
+    const saved = localStorage.getItem('wedding_guests_v2');
+    if (saved) guestData = JSON.parse(saved);
+  } catch (e) {}
+  
+  renderGuestLists();
+  setupGuestButtons();
+}
+
+function setupGuestButtons() {
+  const pairs = [
+    { btn: 'btn-nastya-yes', inp: 'inp-nastya-yes', key: 'ny' },
+    { btn: 'btn-nastya-maybe', inp: 'inp-nastya-maybe', key: 'nm' },
+    { btn: 'btn-misha-yes', inp: 'inp-misha-yes', key: 'my' },
+    { btn: 'btn-misha-maybe', inp: 'inp-misha-maybe', key: 'mm' }
+  ];
+  
+  pairs.forEach(p => {
+    const btn = document.getElementById(p.btn);
+    const inp = document.getElementById(p.inp);
+    if (btn && inp) {
+      btn.onclick = () => addGuestName(p.key, inp);
+      inp.onkeypress = (e) => {
+        if (e.key === 'Enter') addGuestName(p.key, inp);
+      };
+    }
+  });
+}
+
+function addGuestName(key, input) {
+  const name = input.value.trim();
+  if (!name) return;
+  if (!guestData[key].includes(name)) {
+    guestData[key].push(name);
+    input.value = '';
+    saveGuestData();
+    renderGuestLists();
+  }
+}
+
+function removeGuestName(key, name) {
+  guestData[key] = guestData[key].filter(g => g !== name);
+  saveGuestData();
+  renderGuestLists();
+}
+
+function saveGuestData() {
+  localStorage.setItem('wedding_guests_v2', JSON.stringify(guestData));
+}
+
+function renderGuestLists() {
+  const lists = {
+    ny: 'list-nastya-yes',
+    nm: 'list-nastya-maybe',
+    my: 'list-misha-yes',
+    mm: 'list-misha-maybe'
+  };
+  
+  Object.keys(lists).forEach(key => {
+    const container = document.getElementById(lists[key]);
+    if (!container) return;
+    const isMaybe = key.endsWith('m');
+    const bgColor = isMaybe ? '#fcd34d' : '#86efac';
+    const textColor = isMaybe ? '#92400e' : '#166534';
+    
+    container.innerHTML = guestData[key].map(name => `
+      <div style="padding:6px 12px;background:${bgColor};color:${textColor};border-radius:16px;font-size:12px;display:flex;align-items:center;gap:6px;">
+        ${name}
+        <button onclick="removeGuestName('${key}', '${name.replace(/'/g, "\\'")}');" style="background:0;border:0;color:${textColor};cursor:pointer;font-size:14px;padding:0;margin-left:2px;opacity:0.7;">×</button>
+      </div>
+    `).join('');
+  });
+  
+  updateGuestCounts();
+}
+
+function updateGuestCounts() {
+  document.getElementById('count-ny').textContent = guestData.ny.length;
+  document.getElementById('count-nm').textContent = guestData.nm.length;
+  document.getElementById('count-my').textContent = guestData.my.length;
+  document.getElementById('count-mm').textContent = guestData.mm.length;
+  document.getElementById('total-guests').textContent = 
+    guestData.ny.length + guestData.nm.length + guestData.my.length + guestData.mm.length;
+}
+
+function initCarpooling() {
+  try {
+    const saved = localStorage.getItem('wedding_cars_v1');
+    if (saved) carsData = JSON.parse(saved);
+  } catch (e) {}
+  
+  renderCars();
+  document.getElementById('btn-add-car').onclick = () => addCar();
+  
+  ['inp-car-name', 'inp-car-model', 'inp-car-seats'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.onkeypress = (e) => { if (e.key === 'Enter') addCar(); };
+  });
+}
+
+function addCar() {
+  const name = document.getElementById('inp-car-name').value.trim();
+  const model = document.getElementById('inp-car-model').value.trim();
+  const seats = +document.getElementById('inp-car-seats').value || 4;
+  
+  if (!name || !model) return;
+  
+  carsData.push({ id: Date.now(), name, model, seats, passengers: [] });
+  document.getElementById('inp-car-name').value = '';
+  document.getElementById('inp-car-model').value = '';
+  document.getElementById('inp-car-seats').value = '4';
+  
+  saveCars();
+  renderCars();
+}
+
+function removeCar(carId) {
+  carsData = carsData.filter(c => c.id !== carId);
+  saveCars();
+  renderCars();
+}
+
+function addPassenger(carId) {
+  const allGuests = [...guestData.ny, ...guestData.nm, ...guestData.my, ...guestData.mm];
+  const usedGuests = carsData.flatMap(c => c.passengers);
+  const available = allGuests.filter(g => !usedGuests.includes(g));
+  
+  if (available.length === 0) {
+    alert(t('all_guests_assigned'));
+    return;
+  }
+  
+  const name = prompt(t('choose_guest') + '\n' + available.join('\n'));
+  if (!name || !available.includes(name)) return;
+  
+  const car = carsData.find(c => c.id === carId);
+  if (car && car.passengers.length < car.seats) {
+    car.passengers.push(name);
+    saveCars();
+    renderCars();
+  }
+}
+
+function removePassenger(carId, passengerName) {
+  const car = carsData.find(c => c.id === carId);
+  if (car) {
+    car.passengers = car.passengers.filter(p => p !== passengerName);
+    saveCars();
+    renderCars();
+  }
+}
+
+function saveCars() {
+  localStorage.setItem('wedding_cars_v1', JSON.stringify(carsData));
+}
+
+function renderCars() {
+  const list = document.getElementById('cars-list');
+  if (carsData.length === 0) {
+    list.innerHTML = '<div style="color:var(--text-light);font-size:13px;">' + t('no_cars') + '</div>';
+    return;
+  }
+  
+  list.innerHTML = carsData.map(car => `
+    <div style="padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--card);">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;">
+        <div>
+          <div style="font-weight:600;color:var(--text);">${car.name}</div>
+          <div style="font-size:12px;color:var(--text-light);">${car.model} · ${car.passengers.length}/${car.seats} ${t('seats').toLowerCase()}</div>
+        </div>
+        <button onclick="removeCar(${car.id});" style="background:none;border:none;color:var(--text-light);cursor:pointer;font-size:18px;">×</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
+        ${car.passengers.map(p => `
+          <div style="padding:4px 10px;background:#dbeafe;color:#1e40af;border-radius:14px;font-size:12px;display:flex;align-items:center;gap:4px;">
+            ${p}
+            <button onclick="removePassenger(${car.id}, '${p.replace(/'/g, "\\'")}');" style="background:0;border:0;color:#1e40af;cursor:pointer;font-size:12px;padding:0;">×</button>
+          </div>
+        `).join('')}
+      </div>
+      <button onclick="addPassenger(${car.id});" style="width:100%;padding:6px;background:var(--neutral);border:1px solid var(--border);border-radius:6px;color:var(--text-light);font-size:12px;cursor:pointer;">${t('add_passenger')}</button>
+    </div>
+  `).join('');
+}
+
+document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", initGuests);
+document.addEventListener("DOMContentLoaded", initCarpooling);
 </script>
 
 </body>
