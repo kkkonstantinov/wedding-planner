@@ -906,66 +906,6 @@
   .btn-icon.edit:hover { color: var(--primary); border-color: var(--primary); }
   .cat-usage { font-size: 11px; color: var(--text-light); }
 </style>
-
-  <style>
-    .password-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #faf8f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 99999;
-    }
-    .password-overlay.hidden { display: none; }
-    .password-box {
-      background: #fff;
-      border-radius: 20px;
-      padding: 60px 40px;
-      box-shadow: 0 8px 24px rgba(244, 168, 149, 0.12);
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-    }
-    .password-box h1 { font-size: 32px; color: #f4a895; margin-bottom: 30px; }
-    .password-box input { width: 100%; padding: 12px; border: 2px solid #e8dfd8; border-radius: 10px; font-size: 16px; margin-bottom: 15px; }
-    .password-box input:focus { outline: none; border-color: #f4a895; }
-    .password-box button { width: 100%; padding: 12px; background: #f4a895; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: 600; }
-    .password-box button:hover { background: #ffa07a; }
-    .password-error { color: #dc2626; font-size: 13px; margin-top: 10px; display: none; }
-    .password-error.show { display: block; }
-  </style>
-  <div class="password-overlay" id="pwd-overlay">
-    <div class="password-box">
-      <h1>💕 Misha & Nastya</h1>
-      <form id="pwd-form" onsubmit="checkPassword(event); return false;">
-        <input type="password" id="pwd-input" placeholder="Введи пароль..." required>
-        <button type="submit">🔓 Открыть</button>
-        <div class="password-error" id="pwd-error">❌ Неправильный пароль</div>
-      </form>
-    </div>
-  </div>
-  <script>
-    const PWD = "awx2kdh8QWD6rjk!whg";
-    function checkPassword(e) {
-      const pwd = document.getElementById('pwd-input').value;
-      if (pwd === PWD) {
-        localStorage.setItem('wedding_pass', '1');
-        document.getElementById('pwd-overlay').classList.add('hidden');
-      } else {
-        document.getElementById('pwd-error').classList.add('show');
-        document.getElementById('pwd-input').value = '';
-      }
-    }
-    if (localStorage.getItem('wedding_pass') === '1') {
-      document.getElementById('pwd-overlay').classList.add('hidden');
-    }
-    document.getElementById('pwd-input').focus();
-  </script>
-
 </head>
 <body>
 
