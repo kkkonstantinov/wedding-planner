@@ -1,92 +1,86 @@
 /**
  * Cloudflare Worker для защиты свадебного планера паролем
- * 
- * ИНСТРУКЦИЯ ПО УСТАНОВКЕ:
- * 1. В Cloudflare Pages нажми на проект
- * 2. Settings → Functions
- * 3. Create function → выбери _middleware.ts или создай файл _middleware.ts
- * 4. Вставь этот код (замени PASSWORD на свой пароль)
+ * Сохрани как _worker.js в корне репо
  */
 
-const PASSWORD = "awx2kdh8QWD6rjk!whg"; // ✅ Пароль установлен
-const TOKEN_SECRET = "718b90328b44f959759f1214f6659d57"; // ⚠️ ЗАМЕНИ НА СЛУЧАЙНЫЙ ТЕКСТ!
+const PASSWORD = "awx2kdh8QWD6rjk!whg";
 
-export async function onRequest(context) {
-  const { request } = context;
-  const url = new URL(request.url);
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
 
-  // Если это POST запрос с проверкой пароля
-  if (request.method === "POST" && url.pathname === "/") {
-    try {
-      const data = await request.json();
-      const { password } = data;
+    // Если это POST запрос с проверкой пароля
+    if (request.method === "POST") {
+      try {
+        const data = await request.json();
+        const { password } = data;
 
-      if (password === PASSWORD) {
-        // Пароль правильный! Создаём токен
-        const token = btoa(PASSWORD + "|" + Date.now() + "|" + TOKEN_SECRET);
-        
-        return new Response(
-          JSON.stringify({
-            success: true,
-            token: token,
-            message: "Пароль верный!"
-          }),
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "Set-Cookie": `auth_token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=86400`,
+        if (password === PASSWORD) {
+          // Пароль правильный!
+          return new Response(
+            JSON.stringify({
+              success: true,
+              message: "Пароль верный!"
+            }),
+            {
+              status: 200,
+              headers: {
+                "Content-Type": "application/json",
+                "Set-Cookie": `auth_token=valid; Path=/; Max-Age=86400; SameSite=Lax`,
+              }
             }
-          }
-        );
-      } else {
-        // Пароль неправильный
+          );
+        } else {
+          // Пароль неправильный
+          return new Response(
+            JSON.stringify({
+              success: false,
+              message: "Неправильный пароль"
+            }),
+            {
+              status: 401,
+              headers: {
+                "Content-Type": "application/json"
+              }
+            }
+          );
+        }
+      } catch (err) {
         return new Response(
           JSON.stringify({
             success: false,
-            message: "Неправильный пароль"
+            error: "Ошибка сервера"
           }),
           {
-            status: 401,
+            status: 500,
             headers: {
               "Content-Type": "application/json"
             }
           }
         );
       }
-    } catch (err) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Ошибка сервера"
-        }),
-        {
-          status: 500,
+    }
+
+    // Для GET запросов проверяем авторизацию
+    if (request.method === "GET") {
+      const cookies = request.headers.get("Cookie") || "";
+      const hasValidToken = cookies.includes("auth_token=valid");
+
+      if (!hasValidToken) {
+        // Не авторизован - показываем форму пароля
+        return new Response(getPasswordPage(), {
+          status: 200,
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "text/html; charset=utf-8"
           }
-        }
-      );
+        });
+      }
     }
+
+    // Если авторизован - показываем основной контент (index.html)
+    return env.ASSETS.fetch(request);
   }
-
-  // Для GET запросов проверяем авторизацию
-  if (request.method === "GET") {
-    const cookies = request.headers.get("Cookie") || "";
-    const hasValidToken = cookies.includes("auth_token=");
-
-    if (!hasValidToken) {
-      // Не авторизован - показываем форму пароля
-      return new Response(getPasswordPage(), {
-        headers: {
-          "Content-Type": "text/html; charset=utf-8"
-        }
-      });
-    }
-  }
-
-  // Если авторизован - пропускаем дальше к основному контенту
-  return context.next();
-}
+};
 
 function getPasswordPage() {
   return `<!DOCTYPE html>
@@ -305,7 +299,6 @@ function getPasswordPage() {
       const data = await response.json();
       
       if (data.success) {
-        localStorage.setItem('auth_token', data.token);
         window.location.reload();
       } else {
         formContent.classList.remove('hidden');

@@ -1,9 +1,5 @@
 name = "wedding-planner"
 type = "javascript"
-main = "functions/_middleware.ts"
+main = "_worker.js"
 compatibility_date = "2024-01-01"
 
-[env.production]
-routes = [
-  { pattern = "example.com/*", zone_name = "example.com" }
-]
